@@ -703,6 +703,17 @@ box-sizing: border-box !important;
 			</div>
 			
 		</div>
+	</div>	
+	
+	<div class="form-group" ng-hide="_hideObj">
+		<div class="col-sm-12">
+		
+			
+			<div class="alert alert-success" ng-repeat="x in advertisementEntry">
+				<strong>You have {{ x.count }} Advertisement:</strong> £<span class="rdymdeprice">{{ x.cost   }}<span>
+			</div>
+			
+		</div>
 	</div>		
 
 		<div class="clearfix"></div><br />

@@ -61,7 +61,7 @@ pdfcr(function(){
 			
 			
 			if(pdfcr(this).text()=="Save Later" || pdfcr(this).text()=="Save" || pdfcr(this).text()=="Submit to Que" ){
-				//alert(pdfcr('.readymadeentry').length);
+				
 			
 			pdfcr(this).before('<img class="loadingImg" style="height: 20px; margin: 3px;" src="'+pdftvtpl2_plugin_url+'/assets/img/loading.gif">');
 			
@@ -102,7 +102,8 @@ pdfcr(function(){
 			}
 			
 			var formdata = new FormData(this);			
-			formdata.append('readymadeentry', pdfcr('.readymadeentry').length);
+			formdata.append('readymadeentry', pdfcr('.readymadeentry').length); 
+			formdata.append('advertisemententry', pdfcr('.advertisemententry').length);
 			
 			pdfcr.ajax({
 				url: main_script_object.ajax_url,
@@ -217,7 +218,8 @@ pdfcr(function(){
 		
 				
 			var formdata = new FormData(this);			
-			formdata.append('readymadeentry', pdfcr('.readymadeentry').length);
+			formdata.append('readymadeentry', pdfcr('.readymadeentry').length); 
+			formdata.append('advertisemententry', pdfcr('.advertisemententry').length);
 
 			pdfcr.ajax({
 				url: main_script_object.ajax_url,
@@ -259,6 +261,7 @@ pdfcr(function(){
 			formdata.delete('action');
 			formdata.append('action', 'update_onradio');
 			formdata.append('readymadeentry', pdfcr('.readymadeentry').length);
+			formdata.append('advertisemententry', pdfcr('.advertisemententry').length);
 			
 			pdfcr.ajax({
 				url: main_script_object.ajax_url,
@@ -295,7 +298,8 @@ pdfcr(function(){
 
 			formdata.delete('action');
 			formdata.append('action', 'submittoque');
-			formdata.append('readymadeentry', pdfcr('.readymadeentry').length);
+			formdata.append('readymadeentry', pdfcr('.readymadeentry').length); 
+			formdata.append('advertisemententry', pdfcr('.advertisemententry').length);
 			
 			pdfcr.ajax({
 				url: main_script_object.ajax_url,
@@ -1320,7 +1324,7 @@ app.controller('pdftpl2Ctrl', function($scope, $http) {
 	}
 	//on page load
     $http({method:'post',url:main_script_object.ajax_url,params:{pid:main_script_object.newsletter_id,action:'get_readymade_entry'}}).then(function(response) {
-        $scope.readyMadeEntry = response.data.records;
+        $scope.advertisementEntry = response.data.records;
 		$scope._hideObj = false;
     });	
 	

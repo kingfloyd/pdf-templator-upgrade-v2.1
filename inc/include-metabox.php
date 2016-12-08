@@ -6,11 +6,12 @@ function pdftpl2_add_custom_box($postType) {
 
 
 				
-			add_meta_box( 'metabox', __( 'Article Size', 'pdftpl2' ),  'pdftpl2_post_custom_box', $postType, 'side', 'high');
+			add_meta_box( 'metabox', __( 'Article Size', 'pdftpl2' ),  'pdftpl2_readymadecontent_size', array('pdfreadymadecontent'), 'side', 'high');
+			add_meta_box( 'metabox', __( 'Advertisement Type', 'pdftpl2' ),  'pdftpl2_advertisement_size', array('pdfcr-advertisement'), 'side', 'high');
 
 }
 
-function pdftpl2_post_custom_box() {
+function pdftpl2_readymadecontent_size() {
 	global $post;
 ?>
 <input type="hidden" name="pdftpl2_noncename" id="pdftpl2_noncename" value="<?php echo wp_create_nonce( plugin_basename(__FILE__) ) ?>" />
@@ -31,6 +32,32 @@ function pdftpl2_post_custom_box() {
     <tr><td colspan="2"><br></td></tr>
 </table>
 <?php }
+
+
+function pdftpl2_advertisement_size() {
+	global $post;
+?>
+<input type="hidden" name="pdftpl2_noncename" id="pdftpl2_noncename" value="<?php echo wp_create_nonce( plugin_basename(__FILE__) ) ?>" />
+<table>
+    <tr>
+        <td>
+            <label for="pdftpl2_new_field"><?php echo __("Advertisement Size:", 'pdftpl2' ) ?></label>
+        </td>
+	    <td>
+			
+			<select class="form-control" name="pdftpl2_advertisement_size">
+				<option <?php if(get_post_meta($post->ID, "pdftpl2_advertisement_size", true)=="Quarter Page"): echo "selected"; endif ?>>Quarter Page</option>
+				<option <?php if(get_post_meta($post->ID, "pdftpl2_advertisement_size", true)=="Half Page"): echo "selected"; endif ?>>Half Page</option>
+				<option <?php if(get_post_meta($post->ID, "pdftpl2_advertisement_size", true)=="Full Page "): echo "selected"; endif ?>>Full Page </option>
+			  </select>
+      	</td>
+   	</tr>
+    <tr><td colspan="2"><br></td></tr>
+</table>
+<?php }
+
+
+
 
 
 function pdftpl2_save_postdata( $post_id ) {
@@ -63,6 +90,18 @@ function pdftpl2_save_postdata( $post_id ) {
 	if ($_POST["pdftpl2_article_size"] == "") {
 		  delete_post_meta($post_id, "pdftpl2_article_size");
 	}
+	
+
+	if (!get_post_meta($post_id, "pdftpl2_advertisement_size")) {
+		add_post_meta($post_id, "pdftpl2_advertisement_size", sanitize_text_field($_POST["pdftpl2_advertisement_size"]));
+  	}else{
+  		update_post_meta($post_id, "pdftpl2_advertisement_size", sanitize_text_field($_POST["pdftpl2_advertisement_size"]));
+  	}
+	if ($_POST["pdftpl2_advertisement_size"] == "") {
+		  delete_post_meta($post_id, "pdftpl2_advertisement_size");
+	}
+	
+	
 
 }
 

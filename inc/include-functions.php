@@ -639,6 +639,28 @@ function update_onradio(){
 		
 	}
 	
+	if(isset($_POST['advertisemententry'])){
+		
+		$advertisemententry_request = $_POST['advertisemententry'];
+		
+		if(intval($advertisemententry_request)==1){
+			
+			$readymadeentry_cost = 0.35;
+			
+		}elseif(intval($advertisemententry_request)==2){
+			
+			$readymadeentry_cost = 0.70;
+			
+		}elseif(intval($advertisemententry_request)>=3){
+
+			$readymadeentry_cost = 1.00;
+		
+		}	
+		
+		update_post_meta($pid, 'readymadeentry_cost', $readymadeentry_cost);
+		
+		
+	}	
 	
 	$pricing__newsletter_pagenum = get_post_meta($pid,'pricing__newsletter_pagenum',true);
 	$pdftvtpl2_printing_type = get_post_meta($pid,'pdftvtpl2_printing_type',true);
@@ -899,6 +921,27 @@ function get_readymade_entry(){
 		
 	}
 	print_r('{"records":[{"count":"'.$readymadeentry.'","cost":"'.$readymadeentry_cost.'"}]}');
+		
+	
+	die();
+	
+}
+
+
+function get_advertisemet_entry(){
+	$pid= $_REQUEST['pid'];
+	$advertisemententry = get_post_meta($pid,'advertisemetentry',true);
+	$advertisemententry_cost = get_post_meta($pid,'advertisemetentry_cost',true);
+	if($advertisemententry_cost==0){
+		
+		$advertisemententry_cost = '0.00';
+		
+	}else{
+		
+		$advertisemententry_cost = number_format((float)$advertisemententry_cost, 2, '.', '');
+		
+	}
+	print_r('{"records":[{"count":"'.$advertisemententry.'","cost":"'.$advertisemententry_cost.'"}]}');
 		
 	
 	die();
