@@ -1,0 +1,45 @@
+<?php 
+
+function generate_pdf(){
+	require_once('MPDF57/mpdf.php');
+	require_once 'helper/helper.php';
+
+
+	$current_url="//".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+
+	$urlArray = explode('/', $current_url);
+
+	$post_name =  $urlArray[count($urlArray)-2];
+
+	//helper_print( "post name " . $post_name);
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/wp-load.php';
+
+	if(in_array('pdftemplate', $urlArray)) {
+		//    helper_print( "print pdf");
+	} else {
+		//    helper_print( "do not print pdf");
+	}
+
+
+
+	if(!empty($extraCSS) and !empty($posts)) {
+		helper_html_to_pdf_preview($posts['post_content'], $extraCSS);
+		exit;
+	}
+
+	$pdfpage_contents = get_post_meta($_GET['newsletter_id'],'pdfconverted_contents',true);
+
+
+	//if(get_post_type($post->ID)=='pdftvtpl2'){
+	if($_GET['newsletter_id']!=""){
+		
+		$pdfpage_contents = get_post_meta($_GET['newsletter_id'],'pdfconverted_contents',true);
+		if($pdfpage_contents!=""){
+			if(isset($_GET['pdfpreview']) and $_GET['pdfpreview']==1) {
+				$extraCSS['wattermark'] = "Preview";
+				helper_html_to_pdf_preview_floyd($pdfpage_contents, $extraCSS);
+				exit;
+			}
+		}
+	}
+}

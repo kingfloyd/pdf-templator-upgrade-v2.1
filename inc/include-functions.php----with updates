@@ -1,0 +1,782 @@
+<?php
+
+	$pdftvtpl2_allfields = array(
+	"name"=>"name",
+	"email"=>"email",
+	"company_name"=>"company name", 
+	"company_number"=>"company number", 
+	"phone_number"=>"phone number", 
+	"mobile_number"=>"mobile number", 
+	"fax_number"=>"fax number",
+	"town"=>"town", 
+	"city"=>"city", 
+	"county"=>"county", 
+	"address"=>"address", 
+	"address_2"=>"address 2", 
+	"website"=>"website", 
+	"title"=>"title", 
+	"office_phone"=>"office phone", 
+	"industry"=>"industry", 
+	"birthday"=>"birthday", 
+	"date"=>"date" ); 
+
+	$pdftvtpl2_short = array(
+	
+	"full_name",
+	"email",
+	"company_name", 
+	"company_number", 
+	"phone_number", 
+	"mobile_number", 
+	"fax_number",
+	"town", 
+	"city", 
+	"county", 
+	"address", 
+	"address_2", 
+	"website", 
+	"title", 
+	"office_phone", 
+	"industry", 
+	"birthday", 
+	"date" 
+	
+	); 	
+	
+	$pdftvtpl2_allfields_default = array(
+	"name"=>"YOURDATA",
+	"email"=>"YOURDATA",
+	"company_name"=>"YOURDATA", 
+	"company_number"=>"YOURDATA", 
+	"phone_number"=>"YOURDATA", 
+	"mobile_number"=>"YOURDATA", 
+	"fax_number"=>"YOURDATA",
+	"town"=>"YOURDATA", 
+	"city"=>"YOURDATA", 
+	"county"=>"YOURDATA", 
+	"address"=>"YOURDATA", 
+	"address_2"=>"YOURDATA", 
+	"website"=>"YOURDATA", 
+	"title"=>"YOURDATA", 
+	"office_phone"=>"YOURDATA", 
+	"industry"=>"YOURDATA", 
+	"birthday"=>"YOURDATA", 
+	"date"=>"YOURDATA" ); 	
+	
+
+function pdftvtpl2_styles() {
+
+		if(is_page('create-newsletter')  or is_page('pdf-template-list')){
+			
+		wp_enqueue_style('thickbox');	
+		//wp_enqueue_style('pdftvtpl2-bootstrap-style', pdftvtpl2_plugin_url."/assets/css/bootstrap.min.css");
+		wp_enqueue_style('pdftvtpl2-main-style', pdftvtpl2_plugin_url."/assets/css/main.css");
+		wp_enqueue_style('pdftvtpl2-jqueryui-style', pdftvtpl2_plugin_url."/assets/jquery-ui/jquery-ui.css");
+		
+		}
+
+		
+    
+}
+
+function pdftvtpl2_scripts() {
+
+
+		if(is_page('create-newsletter') or is_page('pdf-template-list')){
+			
+		wp_enqueue_script('media-upload');
+		wp_enqueue_script('thickbox');
+		//wp_enqueue_script( 'pdftvtpl2-bootstrap-js', pdftvtpl2_plugin_url."/assets/js/bootstrap.min.js", array('jquery'), '3.3.7', true );
+		//wp_enqueue_script( 'pdftvtpl2-jquery-ui', pdftvtpl2_plugin_url."/assets/jquery-ui/jquery-ui.js", array('jquery'), '3.3.7', true );
+				
+
+		}
+    
+}
+
+
+
+function checked_radio($postradioval,$radioval){
+	
+	
+	if($postradioval===$radioval){
+		
+		echo "checked";
+		
+	}
+		
+}
+
+function get_selected_meta($valuemeta=null,$value=null){
+	
+	
+	
+	if($valuemeta==$value){		
+		
+		return "selected";
+		
+	}else{
+		
+		return "";
+		
+	}
+
+	
+	
+}
+
+function get_pdfnewsletter_meta($pid,$metakey){
+	
+	return get_post_meta($pid,$metakey,true);
+		
+		
+}
+
+
+
+function get_option_select_pdftemplator($name=null,$value=null){
+	
+	$optionval = get_option($name);
+	
+	
+	if($optionval==$value){		
+		
+		echo "selected='selected'";
+		
+	}	
+}
+
+
+//ajax call
+
+function prefix_ajax_get_postid($ptype) {
+    
+	$ptype= $_REQUEST['post_type'];
+	$myposts = get_posts( array( 'post_type' => $ptype ) ); 
+	$html = "<form action='' method='post' id='getPostContent'>";
+	$html .=  "<select id='readymadepost'><option>---Select One---</option>";
+
+	foreach ( $myposts as $post ) : setup_postdata( $post );
+	
+	$html .= "<option value='".$post->ID."'>".get_the_title($post->ID)."</option>";
+	
+	endforeach; 
+	wp_reset_postdata();
+	 $html .= "</select>";
+	 $html .= "&nbsp; &nbsp; <input class='btn-primary btn' id='contentAdder' type='button' name='' value='Add content to editor'>";
+	 $html .= "</form?>";
+	 
+	 echo $html;
+	 
+	 
+	die();	
+}
+
+function prefix_ajax_get_postcontent($ptype) {
+    
+	$pid = $_REQUEST['post_content'];
+	
+	$post = get_post($pid );
+	
+	
+									
+
+		echo $content   = $post->post_content;
+
+	 
+	die();	
+}
+
+
+function prefix_ajax_get_readymadecontent($cat) {
+    
+$catid = $_REQUEST['catid'];
+	
+$args = array(
+	'post_type' => 'pdfreadymadecontent',
+	'tax_query' => array(
+		array(
+			'taxonomy' => 'pdfReadymade',
+			'field'    => 'term_id',
+			'terms'    => $catid,
+		),
+	),
+);
+$query = new WP_Query( $args );
+
+
+?>
+
+
+
+<?php if ( $query->have_posts() ) : ?>
+
+	<!-- pagination here -->
+
+	<!-- the loop -->
+	<?php while ( $query->have_posts() ) : $query->the_post(); ?>
+
+		<div class="col-md-3" style="margin-bottom:10px;">
+			<div class="media" style="border: 1px solid;">
+			  <div class="" style="width:250px;">
+				<a href="javascript:void(0);" class="readymadepost" id="readymadepost<?php echo $query->post->ID; ?>">
+				  <?php echo get_the_post_thumbnail($query->post->ID, array("200","200") ); ?>
+				</a>
+			  </div>
+			  <div class="media-body" style="padding:10px;">
+				<p class="media-heading"><b><?php echo get_the_title($query->post->ID); ?></b></p>
+				<?php echo get_the_excerpt($query->post->ID); ?>
+			  </div>
+			</div>
+		</div>	
+	
+	
+	
+	<?php endwhile; ?>
+	<!-- end of the loop -->
+
+	<!-- pagination here -->
+
+	<?php wp_reset_postdata(); ?>
+
+<?php else : ?>
+	<div class="col-md-12"><?php _e( 'Sorry, no posts matched your criteria.' ); ?></div>
+<?php endif; ?>
+
+
+
+
+
+<?php
+	 
+	die();	
+}
+
+function prefix_ajax_get_readymadeinnercontent($cat) {
+
+ $readymadeid = $_POST['readymadeid'];
+ 
+$content_post = get_post($readymadeid);
+$content = $content_post->post_content;
+$content = apply_filters('the_content', $content);
+$content = str_replace(']]>', ']]&gt;', $content);
+
+
+	echo "<div class='readymadecontentAppend' style='display:none;'>";
+	echo $content;
+	echo "</div>";
+
+	die();
+
+}
+
+
+function pdftemplator_enqueue() {
+	
+	if($_REQUEST['newsletter_id']!=""){
+		
+		$nid = $_REQUEST['newsletter_id'];
+	}else{
+		
+		$nid = 1;
+		
+	}
+	
+	wp_enqueue_script( 'ajax-script', pdftvtpl2_plugin_url."/assets/js/main.js", array('jquery'), '3.3.7', true );
+    wp_localize_script( 'ajax-script', 'my_ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ),'PDFsite_url'=>site_url(),'generatehttpurl'=>generate_pdftvtpl2_url(),'step'=>'step'.$nid ) );
+			
+}
+
+
+function generate_pdftvtpl2_url(){
+	global $pdftvtpl2_allfields_default;
+	
+	global $post;
+	
+	$data = site_url()."/create-newsletter?newsletter_id=".$_REQUEST['newsletter_id']."&".http_build_query($pdftvtpl2_allfields_default);
+	
+	return $data;
+	
+
+}
+
+function get_csv_listing_head(){
+	
+	
+	$data =  get_post_meta($_REQUEST['newsletter_id'],'customer_list_head',true);
+	//print_r($data);
+	if(is_array($data)){
+	return $data = site_url()."/create-newsletter?newsletter_id=".$_REQUEST['newsletter_id']."&".http_build_query($data);
+	}
+	
+}
+
+function get_csv_listing($newsletterID){
+	
+	print_r(get_post_meta($_REQUEST['newsletter_id'],'customer_list',true));
+	
+	
+	
+}
+
+/* echo "<pre>dasdsaasdasdsadasasdasdsadsadasda";
+echo get_csv_listing_head($nid);
+echo "</pre>";
+ */
+
+
+function process_service(){
+
+
+/**
+ *  Example API POST call
+ *  Post a service to queue
+ */
+
+// type of service
+$service = 'newsletter';
+
+$data = array (
+ "partner_id" => 1234,
+ "password" => '',
+ "deliver_to" => 'First Name Last Name',
+ "cost" => 0.00,
+ "schedule" => '12-12-12'
+);
+
+// api post url
+$url = 'http://connect.umbrellasupport.co.uk/'.$service.'/';
+
+// set up the curl resource
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+
+// execute the request
+$output = curl_exec($ch);
+
+// output the profile information - includes the header
+echo '<pre>';
+echo($output) . PHP_EOL;
+echo '</pre>';
+
+// close curl resource to free up system resources
+curl_close($ch);
+
+
+}
+
+
+function process__pdftemplate_form(){
+	
+	
+	$pid = $_POST['pid'];
+
+	$user_id = get_current_user_id();
+	
+/* 	$my_post = array(
+      'ID'           => 37,
+      'post_title'   => 'This is the post title.',
+      'post_content' => 'This is the updated content.',
+	);
+	
+	  wp_update_post( $my_post ); */
+
+$previousepagenum = get_post_meta($pid,'pdftvtpl2_newsletter_pagenum',true);
+	  
+foreach ($_POST as $key => $value) {
+	update_post_meta($pid, $key, $value);
+}
+
+	
+	
+
+	
+	
+
+
+
+if($_REQUEST['step1']=="true"){
+	if($_REQUEST['pdftvtpl2_newsletter_pagenum'] != $previousepagenum){
+			for($i=0;$i<=$_POST['pdftvtpl2_newsletter_pagenum'];$i++){
+				
+				$array_initial_val[$i] = '<li class="gs-w" data-sizey="2" data-sizex="12" data-col="1" data-row="1" style="padding: 10px; background: rgb(255, 255, 199) none repeat scroll 0% 0%; margin-top: auto; margin-bottom: auto; position: absolute; top: 5px; left: 5px;">							
+											<div class="settings-wrap">
+												<button style="float: right;"  class="close-grid" type="button">x</button>
+												<div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal">
+													<img style="height: 20px; margin: 3px;" src="'.pdftvtpl2_plugin_url.'/assets/img/settings-icon.png">
+												</div>									
+												<div style="float: right;" class="pdftv2-column-content-edit" id="pdftv2-column-content-edit" data-toggle="modal" data-target="#pdftv2-wp-editor"> 
+													<img style="cursor:pointer;height: 16px; margin: 5px;" src="'.pdftvtpl2_plugin_url.'/assets/img/edit-icon.png">
+												</div>								
+											</div>
+											<div class="grid-content-wrap">								
+											</div>								
+										</li>';
+										
+				$array_initial_val2[$i] = '<div class="gs-w" data-sizey="2" data-sizex="12" data-col="3" data-row="1" style="padding: 10px; background: rgb(255, 255, 199) none repeat scroll 0% 0%; margin-top: auto; margin-bottom: auto; min-height: auto; position:absolute; top:5px; left:5px; width:762px; height:265px;">						
+											<div class="grid-content-wrap">								
+											</div>								
+										</div>';									
+					
+				
+			}
+			
+			
+			if($_POST[PREMETA.'newsletter_select_template']!=""){
+				
+				$pdfpages_contents = get_post_meta($_POST[PREMETA.'newsletter_select_template'], 'pdfpages_contents', true);
+				$pdfconverted_contents = get_post_meta($_POST[PREMETA.'newsletter_select_template'], 'pdfconverted_contents', true);
+				
+				if($pdfpages_contents!=""){
+					
+					update_post_meta($pid, 'pdfpages_contents', $pdfpages_contents);
+					
+				}else{
+					
+					update_post_meta($pid, 'pdfpages_contents', $array_initial_val);
+					
+				}
+				
+				if($pdfconverted_contents!=""){
+					
+					update_post_meta($pid, 'pdfconverted_contents', $pdfconverted_contents);
+					
+				}else{
+					
+					update_post_meta($pid, 'pdfconverted_contents', $array_initial_val2);
+					
+				}			
+				
+				
+			}else{
+			
+				update_post_meta($pid, 'pdfpages_contents', $array_initial_val);
+				update_post_meta($pid, 'pdfconverted_contents', $array_initial_val2);
+			
+			}
+			
+			
+			echo get_pdf_template_contents(get_post_meta($pid, 'pdfpages_contents',true));
+			
+		exit;		
+
+	}else{
+		
+		echo "no update";
+		
+		exit;
+		
+	}
+
+
+
+}
+
+
+
+	 
+	 	  
+if($_REQUEST['step3']=="true"){
+	  //delivery type
+	  //Self-Mailer (£0.10) A4 Transparent Wallet (£0.20)
+	  
+	if($_REQUEST['pdftvtpl2_printing_type']=="Full Colour (£0.20)"){
+		 
+		$totalprice = 0.20;
+		 
+	 }	
+	  
+	  
+	 if($_POST['pdftvtpl2_delivery_type']=="Self-Mailer (£0.10)"){
+		 
+		$totalprice = $totalprice + 0.10;
+		
+		
+	 }elseif($_POST['pdftvtpl2_delivery_type']=="A4 Transparent Wallet (£0.20)"){	  
+	 
+		$totalprice = $totalprice + 0.20;
+	 
+	 }
+		  	  
+	  
+	  //number of pages
+	 if(get_post_meta($pid,'pdftvtpl2_newsletter_pagenum',true)==4){
+		 
+		$totalprice = $totalprice + 0.60;
+		 
+	 }elseif(get_post_meta($pid,'pdftvtpl2_newsletter_pagenum',true)==8){
+		 
+		 $totalprice = $totalprice + 1.00;
+		 
+	 }elseif(get_post_meta($pid,'pdftvtpl2_newsletter_pagenum',true)==12){
+
+		 $totalprice = $totalprice + 1.20;
+		
+	 }
+	 
+	 
+	 //Delivery Class:
+	 
+	 if($_POST['pdftvtpl2_delivery_class']=="2nd Class Mail (£0.40)"){
+		 
+		 $totalprice = $totalprice + 0.40;
+		 
+	 }elseif($_POST['pdftvtpl2_delivery_class']=="1st Class Mail (£0.55)"){
+	 
+		$totalprice = $totalprice + 0.55;
+	 
+	}
+	
+	//Accompanying Letter:
+
+	 if($_POST['pdftvtpl2_accompanying_letter']=="Yes (£0.15 Discount)"){
+		 
+		 $totalprice = $totalprice + 0.15;
+		 
+	 }
+	 
+	 
+	 //Allow up to 2 Promotional Leaflets:
+
+	 if($_POST['pdftvtpl2_promotional_leaflets']=="Yes (£0.20 Discount)"){
+		 
+		 $totalprice = $totalprice + 0.20;
+		 
+	 }	 
+	
+	if($totalprice!=""){	
+	update_post_meta($pid, 'totalprice', number_format((float)$totalprice, 2, '.', ''));	
+	}
+
+}
+
+	$totalprice = number_format((float)get_post_meta($pid,'totalprice',true), 2, '.', '');
+	echo $submit_return = "<div class='alert-success alert returnDataprocess'>PDF Template saved!<div id='hiddentotal' style='display:none;'>".$totalprice."</div></div>";
+		
+
+	exit;
+	
+}
+
+
+
+
+// ADD NEW COLUMN
+function ST4fim_columns_head($defaults) {
+    $defaults['manufacturer_id'] = 'Manufacturer ID';
+    return $defaults;
+}
+
+
+
+
+function get_pdf_template_contents($pdfpage_contents){
+	
+		$pagesnum = count($pdfpage_contents)-1;
+	
+	?>
+	
+<script type="text/javascript">
+	var pdftvtpl2_plugin_url = '<?php echo pdftvtpl2_plugin_url; ?>';
+	
+	<?php foreach($pdfpage_contents as $i=>$val){ ?>
+		var gridster<?php echo $i; ?>= '';
+	<?php } ?>
+	var pdfcr = jQuery.noConflict();
+	pdfcr(document).ready(function () {
+
+		pdfcr('.datepicker').datepicker();
+		
+		//gridster start function
+	
+		
+		<?php foreach($pdfpage_contents as $i=>$val){ ?>
+		
+		gridster<?php echo $i; ?> = null;
+		
+		gridster<?php echo $i; ?> = pdfcr("#pdf<?php echo $i; ?> ul").gridster({
+
+            widget_base_dimensions: ['auto', 140],           
+			
+			min_rows:1,
+			min_cols: 1,
+			max_cols: 12,
+			max_rows: 12,
+			widget_margins: [5, 5],
+			
+			resize: {
+				enabled: true,
+					 stop: function (e, ui, $widget) {
+						 
+
+					var newDimensions = this.serialize($widget)[0]; 
+						 
+					var newHeight = this.resize_coords.data.height;
+					var newWidth = this.resize_coords.data.width;
+					//alert(newHeight+" == "+newWidth)
+					//this.resize_last_sizex = 12;
+					
+					
+					var ctnh = pdfcr('.grid-content-wrap',currentLI).height()/144
+					
+					if(newDimensions.size_y>ctnh){
+						
+						ctnh = newDimensions.size_y;
+						
+					}
+					
+					gridster<?php echo $i; ?>.resize_widget($widget,newDimensions.size_x,ctnh)
+
+				// alert("New width: " + this.resize_last_sizex);
+				// alert("New height: " + this.resize_last_sizey)
+				
+				}
+			},
+
+		}).data('gridster');
+		
+		
+		
+		pdfcr('#pdf<?php echo $i; ?> ul').css({'padding': '0'});		
+		pdfcr('#pdf<?php echo $i; ?> .addnew').click(function(){		
+			 
+			var gridcontent = pdfcr('#pdfpagewrap'+localStorage.selectedpdf+' ul').height()+144;
+			
+			if(gridcontent>1162){
+						
+						alert("Sorry cannot add content. Content height exceed the current page content.");
+						
+			}else{
+		
+			gridster<?php echo $i; ?>.add_widget('<li data-sizey="2" data-sizex="6" data-col="3" data-row="1" style="padding:10px; background: rgb(255, 255, 199);"  ><div class="settings-wrap"><button style="float: right;"  class="close-grid" type="button">x</button><div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal"><img style="height: 20px; margin: 3px;" src="<?php echo pdftvtpl2_plugin_url; ?>/assets/img/settings-icon.png"></div><div style="float: right;" class="pdftv2-column-content-edit" id="pdftv2-column-content-edit" data-toggle="modal" data-target="#pdftv2-wp-editor"><img style="cursor:pointer;height: 20px;margin: 5px;" src="<?php echo pdftvtpl2_plugin_url; ?>/assets/img/edit-icon.png"></div></div><div class="grid-content-wrap"></div></li>', 2, 1);	
+			
+			}
+			
+			
+			
+		})		
+		pdfcr(document).on('click','#pdf<?php echo $i; ?> .close-grid',function(){
+			
+			gridster<?php echo $i; ?>.remove_widget( pdfcr(this).parent().parent() );
+			
+		});
+		
+		<?php } ?>
+		
+	
+	});
+</script>
+	
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="row pdfv2-pages-preview">
+				
+				<?php foreach($pdfpage_contents as $i=>$val){ ?>
+					<?php if($i==0){ ?>
+					<a href="javascript:void(0)" class="pdfnavigate">
+						<div class="col-sm-1">
+							<img class="gotopage<?php echo $i; ?>" style="width:100%; margin-left:4px;" src="<?php echo pdftvtpl2_plugin_url; ?>/assets/img/page-img.png">						
+						   <b> Front Page</b>
+						</div>
+					</a>
+					<?php }elseif($i==$pagesnum){ ?>
+					<a href="javascript:void(0)" class="pdfnavigate">
+						<div class="col-sm-1">
+							<img class="gotopage<?php echo $i; ?>" style="width:100%; margin-left:4px;" src="<?php echo pdftvtpl2_plugin_url; ?>/assets/img/page-img.png">							
+						   <b> Back Page</b>
+						</div>	
+					</a>		
+					<?php }else{ ?>
+					<a href="javascript:void(0)" class="pdfnavigate">
+						<div class="col-sm-1">
+							<img class="gotopage<?php echo $i; ?>" style="width:100%; margin-left:4px;" src="<?php echo pdftvtpl2_plugin_url; ?>/assets/img/page-img.png">							
+						   <b> Page <?php echo $i; ?></b>
+						</div>					
+					</a>	
+					<?php } ?>
+					
+				<?php } ?>
+			</div>
+		</div>
+	</div>	
+	<div class="row">	
+		<div class="col-md-12">
+		
+		
+			<!-- default value on page load -->
+				<?php foreach($pdfpage_contents as $i=>$val){ ?>
+				<div id="pdf<?php echo $i; ?>" class="pdf-page callgotopage<?php echo $i; ?>">
+					<div>
+						<button class='btn btn-danger addnew' type="button">Add single grid</button>
+						<button data-pdfselected="pdf<?php echo $i; ?>" type='button' class='btn btn-danger pdfaddrow' data-toggle="modal" data-target="#pdfAddGrid">Add Columns</button>
+						<button data-pdfselected="pdf<?php echo $i; ?>" type='button' class='btn btn-danger pdfaddrow' data-toggle="modal" data-target="#pdfAddReadymade">Add Readymade Content</button>
+						&nbsp;&nbsp;&nbsp;
+						<?php if($i==0){ ?>
+						<b> Front Page</b>
+						<?php }elseif($i===$pagesnum){ ?>
+						<b> Back Page</b>
+						<?php }else{ ?>
+						<b> Page <?php echo $i; ?></b> 
+						<?php } ?>
+					</div>
+					<br>		    
+					<div id="pdfpagewrap<?php echo $i; ?>" class="pdfwrapper gridster">
+						<ul>
+							<?php echo $val; ?>
+			
+						</ul>					
+					</div>
+				</div>
+				
+	
+				
+				<textarea style="display:none;" id="pdfcontent_input_holder<?php echo $i; ?>" name="pdfconverted_contents[]" ></textarea>
+				<textarea style="display:none;" id="pdfcontent_input<?php echo $i; ?>"  name="pdfpages_contents[]"  ><?php echo $val; ?></textarea>
+				<?php } ?>
+	
+			
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<br /><br />
+	<input type="hidden" name="action" value="process__pdftemplate_form" />
+	<input type="hidden" name="pid" value="<?php echo $_REQUEST['newsletter_id']; ?>" />
+	<input type="hidden" name="step2" value="true" />
+	<div class="form-group">
+		<div class="col-md-3">
+			<a target="_blank" href="<?php echo site_url(); ?>/create-newsletter/?newsletter_id=<?php echo $_REQUEST['newsletter_id']; ?>&pdfpreview=1" class="btn-danger btn">Preview</a>
+		</div>		
+		<div class="col-md-3">
+			<button type="submit" name="step2button" class="btn btn-danger navigatebtn">Save Later</button>
+		</div>		
+		
+		<div class="col-md-3">
+			<button type="submit" name="step2button" class="btn btn-danger navigatebtn navigatebtnnext">next</button>
+		</div>											
+	</div>	
+	
+	
+	<?php
+	
+	
+	
+}
+
+
+ 
+// SHOW THE FEATURED IMAGE
+function ST4fim_columns_content($column_name, $post_ID) {
+    if ($column_name == 'manufacturer_id') {
+        $manufacturer_id = get_post_meta($post_ID,'manufacturer_id',true);
+        if ($manufacturer_id) {
+            echo $manufacturer_id;
+        }
+    }
+}
+
+add_filter('manage_toplevel_page_shopp-products_columns', 'ST4fim_columns_head', 10);
+add_action('manage_shopp_product_posts_custom_column', 'ST4fim_columns_content', 10, 2);

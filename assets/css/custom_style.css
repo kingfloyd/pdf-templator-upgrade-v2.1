@@ -1,0 +1,257 @@
+.pdfv2-container-header {
+    /*border:1px solid red;*/
+    /*padding-bottom:50px;*/
+}
+.pdfv2-container-middle {
+    /*border:1px solid green;*/
+    /*height:300px;*/
+    display: flex;
+}
+.pdfv2-container-middle div {
+    /*     border:1px solid yellow; */
+}
+
+
+.container-center-left {
+    height: auto;
+    padding:0px;
+}
+.container-center-left .row {
+    margin:0px;
+    padding:0px;
+
+
+}
+.center-left-header {
+    /* height:200px; */
+    background-color: black;
+    color:white;
+    /* font-size:30px; */
+    /*     text-align: center; */
+}
+
+.pdftv2-row {
+    background-color: grey;
+    padding:5px;
+
+    /*     text-align: center; */
+
+}
+
+.pdftv2-row p {
+    /* font-size:30px; */
+    /*     cursor: pointer; */
+}
+
+
+.container-center-left .row div {
+    /* height: 300px; */
+}
+
+.container-center-left textarea {
+    resize:none;
+    width: 100%;
+    height:500px;
+}
+
+
+
+.pdftv2-page {
+    text-align: right;
+    padding-right: 20px;
+    padding: 10px;
+    font-weight: bold;
+    background-color: #000000;
+    color: white;
+}
+
+.container-middle-right {
+    padding:0px;
+}
+.container-middle-right ul li.list-group-item:last-child, .container-middle-right ul li.list-group-item:first-child  {
+    -webkit-border-radius:0px;
+    -moz-border-radius:0px;
+    border-radius:0px;
+;;
+}
+
+.container-middle-right button {
+    width: 100%;
+    padding: 5%;
+    -webkit-border-radius:0px;
+    -moz-border-radius:0px;
+    border-radius:0px;
+}
+
+.pdfv2-container-footer {
+    /*border:1px solid yellow;*/
+}
+.pdfv2-container-footer.row div{
+    /*border:1px solid red;*/
+}
+.pdfv2-container-footer button {
+    padding: 10px 50px;
+}
+
+
+
+.pdfv2-title-file {
+
+    text-align:center;
+    padding-top:20px;
+}
+.pdfv2-title-file p {
+    text-decoration:underline;
+    font-size:20px;
+}
+
+.pdfv2-pages-preview {
+    /*border:1px solid red;*/
+    padding-left:20px;
+    padding-right:20px;
+    padding-bottom:20px;
+    padding-top:20px;
+}
+
+.pdfv2-pages-preview div {
+    border:1px solid grey;
+    padding-bottom: 9px;
+    padding-top: 9px;
+    margin-left:5px;
+    margin-right:5px;
+    width:176px;
+    text-align:center;
+}
+
+.border-green{
+    border:1px solid rgba(100, 101, 100, 0.13);
+}
+.border-red {
+    /*border:1px solid red;*/
+}
+.padding-20px {
+    padding:20px;
+}
+
+/*modal*/
+
+.modal {
+    margin-top: 20px;
+}
+
+
+#pdfPreview .modal-content{
+    width: 120%;
+    margin-left: -60px;
+}
+
+
+.pdfAddGrid .modal-body .row {
+    cursor: pointer;
+}
+
+.pdfAddGrid .modal-body .row div {
+    border:1px solid grey;
+    padding:10px;
+}
+.pdfAddGrid .modal-body {
+    padding: 10px 25px;
+}
+
+/* textarea */
+.pdftv2-popup-textarea-div {
+    height: 144px;padding: 6px 7px;
+}
+
+.pdftv2-popup-textarea-div textarea {
+    width: 100%;height: 212%;margin-top: 0px;margin-bottom: 0px;resize: none;
+}
+
+.pdftv2-popup-shortcodes {
+    padding: 3px 10px;border-left: 1px solid #e5e5e5;
+}
+
+
+/**
+* Content
+*/
+
+.pdftv2-content-container {
+    word-wrap: break-word;
+    padding:6px;
+}
+
+.pdftv2-row .col-sm-2,
+.pdftv2-row .col-sm-3,
+.pdftv2-row .col-sm-4,
+.pdftv2-row .col-sm-6,
+.pdftv2-row .col-sm-8,
+.pdftv2-row .col-sm-10,
+.pdftv2-row .col-sm-12 {
+    padding:2px !important;
+    padding-right:0px !important;
+    padding-left:0px !important;
+}
+
+
+
+.pdftv2-settings-column {
+    border: 1px solid #f3f3f3;
+    background-color: white;
+    text-align:right;
+    padding: 2px;
+}
+
+.pdftv2-settings-column button {
+    height:20px;
+    padding:0 6px;
+    font-size:10px
+}
+
+.pdftv2-button-column-delete img, .pdftv2-button-column-settings img {
+    cursor: pointer;
+}
+
+
+#pdftv2-column-content-edit {
+    display:none;
+}
+
+.pdftv2-content-container:hover > #pdftv2-column-content-edit{
+    display:block;
+}
+
+#pdftv2-column:hover > #pdftv2-column-content-edit {
+
+}
+
+.wp-editor-container textarea.wp-editor-area,
+.mceIframeContainer iframe,
+#qtrans_textarea_content_ifr,
+iframe#name_of_iframe_id.wp-editor-container textarea.wp-editor-area,
+.mceIframeContainer iframe {
+    min-height:200px !important;
+}
+
+
+#pdftv2-row-container {
+    height: 700px;
+    border:1px solid grey;
+    background-color:#f3f3f3;
+}
+
+
+.pdftv2-page-number {
+    /* border:1px solid red; */
+    text-align: right;
+    padding-right: 7px;
+    color: grey;
+    font-weight: bold;
+    font-family: verdana;
+    /* font-style: italic; */
+    background: white;
+    border: none;
+}
+
+
+
