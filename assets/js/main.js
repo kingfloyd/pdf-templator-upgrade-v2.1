@@ -557,60 +557,6 @@ pdfcr(function(){
 			
 		})
 		
-		// form submut function
-		/* pdfcr('#pdfpageform').submit(function(){
-			
-			pdfcr('.pdf-page').each(function(ind,val){
-				
-				
-				var contentholder = '';
-				
-				pdfcr('#pdfpagewrap'+ind+' ul li').each(function(){
-					
-					
-					var attributes = pdfcr(this).prop("attributes");
-					var attrr = '';
-					var classs = '';
-					var htmlbackground = pdfcr(this).css("backgroundColor");
-					var htmlposition = pdfcr(this).css("position");
-					var htmltop = pdfcr(this).css("top");
-					var htmlleft = pdfcr(this).css("left");
-					var htmlwidth = pdfcr(this).width();
-					var htmlheight = pdfcr(this).height();
-					var htmlcontent = pdfcr(this).html()
-					var htmlclass = pdfcr(this).attr("class");
-
-					pdfcr.each(attributes, function() {
-						
-						if(this.name=="style"){
-						attrr += this.name+"='"+this.value+" position:"+htmlposition+"; top:"+htmltop+"; left:"+htmlleft+"; width:"+htmlwidth+"px; height:"+htmlheight+"px;' ";
-						}
-						
-						if(this.name=="class"){
-						classs += this.name+"='"+this.value+"' ";	
-						}
-						
-						
-						
-					});
-
-					
-					
-					contentholder += "<div "+classs+" "+attrr+">"+htmlcontent+"</div>";
-							//alert(htmlbackground)	
-							
-							//alert(contentholder)
-				})
-				//converted			
-				pdfcr('#pdfcontent_input_holder'+ind).val(contentholder);
-				pdfcr('#pdfcontent_input'+ind).val(pdfcr('#pdfpagewrap'+ind+' ul').html());
-			
-				
-			})
-		
-			//return false;
-		}) */
-		
 		//editor retainer
 		
 		
@@ -658,44 +604,26 @@ pdfcr(function(){
 				}
 			);
 	})	
+	//advertisement
+	pdfcr(document).on('change','#specific-advertisement',function(){
+			//alert(pdfcr('#pdftpl_article_size').val())
+			pdfcr.post(
+				main_script_object.ajax_url, 
+				{
+					'action': 'get_pdftpl2advertisement',
+					//'article_size': pdfcr('#pdftpl_article_size').val(),
+					'catid':   pdfcr('#specific-advertisement').val()
+				}, 
+				function(response){
+					
+					
+					pdfcr('.listcontaineradvertisement').html(response);
+				}
+			);
+	})		
 	
-/* 	
-	pdfcr(document).on('change','#specific-ptype',function(){
-		
-			pdfcr.post(
-				main_script_object.ajax_url, 
-				{
-					'action': 'get_postid',
-					'post_type':   pdfcr(this).val()
-				}, 
-				function(response){
-					
-					pdfcr('.posts-wrapper').html(response);
-				}
-			);
-	})
-	pdfcr(document).on('click','#contentAdder',function(){
-		
-			var content = pdfcr('#readymadepost').val();
-			
-			pdfcr.post(
-				main_script_object.ajax_url, 
-				{
-					'action': 'get_postcontent',
-					'post_content':  content
-				}, 
-				function(response){
-					
-					tinyMCE.get('mycustomeditor2').setContent(response);
-					
-					pdfcr('#postEditor').show();
-					
-				}
-			);
-			
+	
 
-	}) */
-	
 	pdfcr(document).on('click','#addgridcontent',function(){
 		
 		
@@ -938,6 +866,22 @@ pdfcr(function(){
 		
 	})
 	
+	//for advertisement
+	pdfcr(document).on('click','.addvertisementpost',function(){
+		
+		var rdyid = pdfcr(this).attr("id").split("addvertisementpost")[1];
+		
+		pdfcr('.addreadyselectoradvert').val(rdyid);
+		
+		pdfcr('.listcontainer .media').css('border','1px solid #000');
+		
+		pdfcr('.media',this).css('border','1px solid red');
+		
+		
+	})	
+	
+	
+	
 	pdfcr(document).on('dblclick','.readymadepost',function(){
 		
 		
@@ -1007,6 +951,78 @@ pdfcr(function(){
 	})	
 
 	
+	//for advertisement function
+	
+	
+	pdfcr(document).on('dblclick','.addvertisementpost',function(){
+		
+		
+		var readymadeid = pdfcr('.addreadyselectoradvert').val();
+		if(readymadeid!=""){
+			pdfcr.post(
+				main_script_object.ajax_url, 
+				{
+					'action': 'get_advertisementinnercontent',
+					'readymadeid':   readymadeid
+				}, 
+				function(response){
+					//calculate
+					pdfcr('.advertisementcontentAppend').remove();
+					pdfcr('body').append(response);
+				
+					var rdymdcontentHeight = pdfcr('.advertisementcontentAppend').height();
+					var rdymdcontentWidth = pdfcr('.advertisementcontentAppend').width();
+					
+					var selectedpd = selectedpdf.split('pdf');
+					var datus = eval('gridster'+selectedpd[1]);		
+					var defaultheightpdf = 1155;					
+					var gridcontent = pdfcr('#pdfpagewrap'+selectedpd[1]+' ul').height();
+					
+					var totalnewcontentheight = eval(rdymdcontentHeight+gridcontent);
+										//alert(totalnewcontentheight)
+					if(totalnewcontentheight>1155){
+						
+						alert("Sorry cannot add content. Content height exceed the current page content.");
+						
+					}else{
+						//1155
+						var rW = (rdymdcontentWidth)/7;
+						var rH = (totalnewcontentheight)/140;
+						//alert(rdymdcontentWidth+" "+rW+" "+rH)
+						
+						if(rW>120){
+							
+							rW = 120
+						}
+						if(rH > 120){
+							
+							rH = 120;
+							
+						}
+						
+						//alert(Math.round(rH))
+						
+						datus.add_widget('<li class="no-resize /*static*/" data-col=""  data-row=""  style="background: rgb(255, 255, 199);"  ><div class="settings-wrap"><button style="float: right;"  class="close-grid" type="button">x</button></div><div class="grid-content-wrap advertisemententry" style="padding:10px;" >'+pdfcr('.advertisementcontentAppend').html()+'</div></li>', 120, rH);	
+						
+						
+						
+						 pdfcr('#pdfAddAdvertisement').modal('toggle');
+					}
+	
+					
+				}
+			);		
+		}else{
+			
+			alert("Please select content first.");
+			
+		}
+		
+		
+		
+	})		
+	
+	
 	
 	pdfcr(document).on('click','.addreadymadebtn',function(){
 			
@@ -1074,9 +1090,81 @@ pdfcr(function(){
 		
 	})
 	
+	
+	//advertisement functions
+	pdfcr(document).on('click','.addadvertisementbtn',function(){
+			
+		var readymadeid = pdfcr('.addreadyselectoradvert').val();
+		if(readymadeid!=""){
+			pdfcr.post(
+				main_script_object.ajax_url, 
+				{
+					'action': 'get_advertisementinnercontent',
+					'readymadeid':   readymadeid
+				}, 
+				function(response){
+					//calculate
+					pdfcr('.advertisementcontentAppend').remove();
+					pdfcr('body').append(response);
+				
+					var rdymdcontentHeight = pdfcr('.advertisementcontentAppend').height();
+					var rdymdcontentWidth = pdfcr('.advertisementcontentAppend').width();
+					
+					var selectedpd = selectedpdf.split('pdf');
+					var datus = eval('gridster'+selectedpd[1]);		
+					var defaultheightpdf = 1155;					
+					var gridcontent = pdfcr('#pdfpagewrap'+selectedpd[1]+' ul').height();
+					
+					var totalnewcontentheight = eval(rdymdcontentHeight+gridcontent);
+										//alert(totalnewcontentheight)
+					if(totalnewcontentheight>1155){
+						
+						alert("Sorry cannot add content. Content height exceed the current page content.");
+						
+					}else{
+						//1155
+						var rW = (rdymdcontentWidth)/7;
+						var rH = (totalnewcontentheight)/140;
+						//alert(rdymdcontentWidth+" "+rW+" "+rH)
+						
+						if(rW>120){
+							
+							rW = 120
+						}
+						if(rH > 120){
+							
+							rH = 120;
+							
+						}
+						
+						//alert(Math.round(rH))
+						
+						datus.add_widget('<li class="no-resize /* static*/ " data-col=""  data-row=""  style="background: rgb(255, 255, 199);"  ><div class="settings-wrap"><button style="float: right;"  class="close-grid" type="button">x</button></div><div class="grid-content-wrap advertisemententry" style="padding:10px;" >'+pdfcr('.advertisementcontentAppend').html()+'</div></li>', 120, rH);	
+						
+						
+						
+						 pdfcr('#pdfAddAdvertisement').modal('toggle');
+					}
+	
+					
+				}
+			);		
+		}else{
+			
+			alert("Please select content first.");
+			
+		}
+		
+		
+	})	
+	
+	
+	
 	//on modal close default
 	pdfcr('#pdfAddReadymade').on('hidden.bs.modal', function () {
 	   pdfcr('.addreadyselector').val("");
+	   pdfcr('.addreadyselectoradvert').val("");
+	   
 	   pdfcr('.listcontainer .media').css('border','1px solid #000');
 	})	
 	
@@ -1103,37 +1191,10 @@ pdfcr(function(){
 	})	
 	
 
-	 	
-/* 	
-	//add pup up image
-	
-    pdfcr('#uploadimg').click(function() {
-		
-        input_selection = "2";
-
-        tb_show('Upload a logo', main_script_object.PDFsite_url+'/wp-admin/media-upload.php?type=file&tab=type&TB_iframe=true&post_id=0', false);
-
-        pdfcr("#TB_iframeContent").load(function(){
-           pdfcr("#TB_iframeContent").contents().find('#tab-library').remove();
-        })
-        return false;
-    });
-	
-    // Display the Image link in TEXT Field.parent()
-    window.send_to_editor = function(html) {
-        var image_url = pdfcr(html).attr('href');
-       
-        alert("File Added.")
-        pdfcr('#gridbackground-image').val(image_url);
-
-
-
-
-        tb_remove();
-    }		 */
 	var file_frame; 
 	
-	// attach a click event (or whatever you want) to some element on your page
+	// attach a click event for pop up media
+	
 	pdfcr( '#uploadimg' ).on( 'click', function( event ) {
 		event.preventDefault();
 
@@ -1246,6 +1307,7 @@ app.controller('pdftpl2Ctrl', function($scope, $http) {
 	
 	}
 	
+	//on button click
 	$scope.loadreadymadecontent = function(){
 		
 
@@ -1256,7 +1318,7 @@ app.controller('pdftpl2Ctrl', function($scope, $http) {
 		
 		
 	}
-
+	//on page load
     $http({method:'post',url:main_script_object.ajax_url,params:{pid:main_script_object.newsletter_id,action:'get_readymade_entry'}}).then(function(response) {
         $scope.readyMadeEntry = response.data.records;
 		$scope._hideObj = false;

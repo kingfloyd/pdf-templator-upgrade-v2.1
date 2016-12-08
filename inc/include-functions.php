@@ -317,6 +317,118 @@ $i = 0;
 }
 
 
+function prefix_ajax_get_pdftpl2advertisement($cat) {
+    //echo  $_REQUEST['article_size'];
+$catid = $_REQUEST['catid'];
+if(isset($_REQUEST['pagenum'])){
+	
+$pagenum = $_REQUEST['pagenum']*4;
+$currpage = $_REQUEST['pagenum'];
+
+}else{
+
+$pagenum = 4;	
+$currpage = 1;
+	
+}	
+$args = array(
+	'post_type' => 'pdfcr-advertisement',
+	'tax_query' => array(
+		array(
+			'taxonomy' => 'pdftpl2advertisement',
+			'field'    => 'term_id',
+			'terms'    => $catid,
+		),	
+		//article_size
+	),	
+/* 	'meta_query' => array(
+		array(
+			'key'     => 'pdftpl2_article_size',
+			'value'   => $_REQUEST['article_size'],
+			'compare' => '=',
+		),
+	),	 */
+	'posts_per_page' => $pagenum
+);
+$query = new WP_Query( $args );
+
+
+$i = 0;
+
+?>
+
+
+<div class="col-md-12">
+<?php if ( $query->have_posts() ) : ?>
+
+	<!-- pagination here -->
+
+	<!-- the loop -->
+	<?php while ( $query->have_posts() ) : $query->the_post(); ?>
+	<?php $size = get_post_meta($query->post->ID,'pdftpl2_article_size',true); ?>
+		<div class="col-md-3 addvertisementpost" id="addvertisementpost<?php echo $query->post->ID; ?>" style="margin-bottom:10px; height:100%; cursor:pointer;">
+			<div class="media" style="border: 1px solid; min-height:290px;">
+			  <div class="" style="width:250px;">
+				<a href="javascript:void(0);" >
+				  <?php echo get_the_post_thumbnail($query->post->ID, array("200","200") ); ?>
+				</a>
+				
+				<?php if($size=="All Sizes"){ ?>
+				
+				<img src="<?php echo pdftvtpl2_plugin_url; ?>/assets/img/allsize.png" style="position: absolute; transform: translate(79%,-156%); width: 100px;" />
+				
+				<?php }elseif($size=="Quarter Page"){ ?>
+				
+				<img src="<?php echo pdftvtpl2_plugin_url; ?>/assets/img/quarter-page.png" style="position: absolute; transform: translate(79%,-156%); width: 100px;" />
+				
+				<?php }elseif($size=="Half Page"){ ?>
+				
+				<img src="<?php echo pdftvtpl2_plugin_url; ?>/assets/img/half-page.png" style="position: absolute; transform: translate(79%,-156%); width: 100px;" />
+				
+				<?php } ?>
+				
+				
+			  </div>
+			  <div class="media-body" style="padding:10px;">
+				<p class="media-heading"><b><?php echo get_the_title($query->post->ID); ?></b></p><br /><br />
+				<?php echo  substr( strip_tags( get_the_excerpt($query->post->ID) ), 0, 40 )."..."; ?>
+				<a href=""></a>
+			  </div>
+			</div>
+		</div>	
+		
+	<?php $i++; ?>
+	<?php if($i==4){ ?>
+	</div>
+	<div class="col-md-12">
+	<?php $i=0; } ?>
+	<?php  endwhile; ?>
+	<?php
+	
+	if($query->max_num_pages!=$_REQUEST['pagenum']){
+		
+		if($query->max_num_pages>1){
+		echo "<br /><br /><p align='center'><a href='javascript:void(0);' id='rdyviewerarticles' data-pagi='$currpage'>View More Articles>></a></p>";
+		}
+		
+	}
+	
+	
+	?>
+	<!-- end of the loop -->
+</div>
+	<!-- pagination here -->
+
+	<?php wp_reset_postdata(); ?>
+
+<?php else : ?>
+	<div class="col-md-12"><?php _e( 'Sorry, no posts matched your criteria.' ); ?></div>
+<?php endif; ?>
+<?php
+	 
+	die();	
+}
+
 
 function pdftpl2_excerpt_filter( $length ) {
     return 10;
@@ -340,6 +452,27 @@ $content = str_replace(']]>', ']]&gt;', $content);
 	die();
 
 }
+
+
+function prefix_ajax_get_advertisementinnercontent($cat) {
+
+ $add = $_POST['readymadeid'];
+ 
+$content_post = get_post($add);
+$content = $content_post->post_content;
+$content = apply_filters('the_content', $content);
+$content = str_replace(']]>', ']]&gt;', $content);
+
+
+	echo "<div class='advertisementcontentAppend' style='display:none;'>";
+	echo $content;
+	echo "</div>";
+
+	die();
+
+}
+
+
 
 
 function pdftemplator_enqueue() {

@@ -39,10 +39,17 @@ add_action( 'wp_ajax_nopriv_get_postcontent', 'prefix_ajax_get_postcontent' );
 add_action( 'wp_ajax_get_readymadecontent', 'prefix_ajax_get_readymadecontent' );
 add_action( 'wp_ajax_nopriv_get_readymadecontent', 'prefix_ajax_get_readymadecontent' );
 
+add_action( 'wp_ajax_get_pdftpl2advertisement', 'prefix_ajax_get_pdftpl2advertisement' );
+add_action( 'wp_ajax_nopriv_get_pdftpl2advertisement', 'prefix_ajax_get_pdftpl2advertisement' );
 
 
 add_action( 'wp_ajax_get_readymadeinnercontent', 'prefix_ajax_get_readymadeinnercontent' );
 add_action( 'wp_ajax_nopriv_get_readymadeinnercontent', 'prefix_ajax_get_readymadeinnercontent' );
+
+
+add_action( 'wp_ajax_get_advertisementinnercontent', 'prefix_ajax_get_advertisementinnercontent' );
+add_action( 'wp_ajax_nopriv_get_advertisementinnercontent', 'prefix_ajax_get_advertisementinnercontent' );
+
 
 
 add_action( 'wp_ajax_process__pdftemplate_form', 'process__pdftemplate_form' );

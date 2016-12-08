@@ -24,7 +24,7 @@ class PopUpPageBuilder extends PageBuilder{
 		//$this->pdftemplatelist();
 		$this->viewcsvlist();
 		$this->viewdefaultvalues();
-		
+		$this->showReadyAdvertisementTemplates();
     }
 
     public function showTextEditor(){}
@@ -158,6 +158,80 @@ class PopUpPageBuilder extends PageBuilder{
                     <div class="modal-footer">
 						<input type="button" class="btn btn-danger addreadymadebtn" value="Insert Content" />
 						<input type="hidden"  class="addreadyselector" />
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <?php
+    }
+	 public function showReadyAdvertisementTemplates()
+    {?>
+        <div class="modal fade bs-example-modal-lg" id="pdfAddAdvertisement" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add Advertisement Content</h4>
+						<p>Sample description</p>
+                    </div>
+                    <div class="modal-body">
+                        <?php $post_types = get_post_types(); ?>
+						
+				<div class="form-group">
+				 
+				   <div class="row">
+					  <div class="col-sm-6">
+						 <label for="email">Advertisement Content Categories</label>					  
+							<?php
+
+							$terms = get_terms( 'pdftpl2advertisement', array(
+								'orderby'    => 'count',
+								'hide_empty' => 0,
+								'number' => 8
+								
+							) );
+
+
+							?>
+							 
+				  
+						  <select id="specific-advertisement" class="form-control" name="watermarkposttype" <?php if(get_option('imgws_watermark_post_type')=="specific_post"): echo "style='display:block;'"; endif; ?> autocomplete='off'>
+							<option>---Select One---</option>
+							<?php if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){  ?>
+							<?php   foreach ( $terms as $term ) { ?>
+							<option value="<?php echo $term->term_id; ?>"><?php echo $term->name; ?></option>
+							
+							
+								<?php } ?>
+							<?php } ?>
+							<option value="Most Popular Articles">Most Popular Articles</option>
+						  </select>					  
+					  
+					  </div>
+					  <!--<div class="col-sm-6 readymadebtn-wrapper">
+						 <label for="email">Article Size</label>
+						  <select class="form-control" id="pdftpl_article_size" name="article_size" autocomplete='off'>
+							<option>All Sizes</option>
+							<option>Quarter Page</option>
+							<option>Half Page</option>
+						  </select>								
+					  </div>-->	
+					  <div class="clearfix"></div><br />
+					  <div class="listcontaineradvertisement">
+					  </div>	 
+					<div class="clearfix"></div>
+				  </div>
+				</div>						
+
+						
+						
+                    </div>
+                    <div class="modal-footer">
+						<input type="button" class="btn btn-danger addadvertisementbtn" value="Insert Content" />
+						<input type="hidden"  class="addreadyselectoradvert" />
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
