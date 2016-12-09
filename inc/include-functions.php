@@ -621,15 +621,11 @@ function process__pdftemplate_form(){
 	
 	}
 	
-	
 	$advertisemententry_cost = floatval($fullpage)+floatval($halfpage)+floatval($quarterpage);
-	
-
 	
 	update_post_meta($pid, 'advertisemententry_cost', $advertisemententry_cost);
 	
 
-	
 	$pricing__newsletter_pagenum = get_post_meta($pid,'pricing__newsletter_pagenum',true);
 	$pdftvtpl2_printing_type = get_post_meta($pid,'pdftvtpl2_printing_type',true);
 	$pdftvtpl2_delivery_type = get_post_meta($pid,'pdftvtpl2_delivery_type',true);
