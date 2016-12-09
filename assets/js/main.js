@@ -701,7 +701,7 @@ pdfcr(function(){
 	
 	pdfcr(document).on('click','.pdfnavigate',function(){
 	
-		pdfcr('.pdfnavigate .navipager div').css('border','1px solid #000');
+		pdfcr('.navipager .pdfnavigate div').css('border','1px solid #000');
 		pdfcr('div',this).css('border','1px solid red');	
 		
 	})

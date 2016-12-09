@@ -2,7 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 
-function pdftpl2_add_custom_box($postType) {
+function pdftvtpl2_add_custom_box($postType) {
 
 
 				
