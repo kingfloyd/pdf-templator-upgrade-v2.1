@@ -211,14 +211,14 @@ class PopUpPageBuilder extends PageBuilder{
 						  </select>					  
 					  
 					  </div>
-					  <!--<div class="col-sm-6 readymadebtn-wrapper">
+					  <div class="col-sm-6 readymadebtn-wrapper">
 						 <label for="email">Article Size</label>
-						  <select class="form-control" id="pdftpl_article_size" name="article_size" autocomplete='off'>
-							<option>All Sizes</option>
-							<option>Quarter Page</option>
-							<option>Half Page</option>
+						  <select class="form-control" id="pdftpl_advertisement_size" name="advert_size" autocomplete='off'>
+								<option>Quarter Page</option>
+								<option>Half Page</option>
+								<option>Full Page </option>
 						  </select>								
-					  </div>-->	
+					  </div>
 					  <div class="clearfix"></div><br />
 					  <div class="listcontaineradvertisement">
 					  </div>	 

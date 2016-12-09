@@ -699,7 +699,7 @@ box-sizing: border-box !important;
 		
 			
 			<div class="alert alert-danger" ng-repeat="x in readyMadeEntry">
-				<strong>You have {{ x.count }} Readymade Article(s):</strong> £<span class="rdymdeprice">{{ x.cost   }}<span>
+				<strong>{{ x.count }}x Readymade Article(s):</strong> £<span class="rdymdeprice">{{ x.cost   }}<span>
 			</div>
 			
 		</div>
@@ -709,8 +709,8 @@ box-sizing: border-box !important;
 		<div class="col-sm-12">
 		
 			
-			<div class="alert alert-success" ng-repeat="x in advertisementEntry">
-				<strong>You have {{ x.count }} Advertisement:</strong> £<span class="rdymdeprice">{{ x.cost   }}<span>
+			<div class="alert alert-success" ng-repeat="x in advertisementEntry" ng-if="x.count != 0">
+				<strong>{{ x.count }}x {{x.name}} Advertisement:</strong> £<span class="rdymdeprice">{{ x.cost   }}<span>
 			</div>
 			
 		</div>
