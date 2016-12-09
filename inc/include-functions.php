@@ -1,8 +1,13 @@
 <?php
 
 // declare array and call it as global
-$user_id = get_current_user_id();
-$pdftvtpl2_allfields_defaults_option = get_option('pdftvtpl2_allfields_defaults'.$user_id);
+	$user_id = get_current_user_id();
+	$pdftvtpl2_allfields_defaults_option = get_option('pdftvtpl2_allfields_defaults'.$user_id);
+	
+	$advertcost_size_array = array(
+	"quarterpage"=>0.10,
+	"halfpage"=>0.20,
+	"fullpage"=>0.40 );
 
 	$pdftvtpl2_allfields = array(
 	"first_name"=>"first name",
@@ -341,13 +346,13 @@ $args = array(
 		),	
 		//article_size
 	),	
-/* 	'meta_query' => array(
+ 	'meta_query' => array(
 		array(
-			'key'     => 'pdftpl2_article_size',
-			'value'   => $_REQUEST['article_size'],
+			'key'     => 'pdftpl2_advertisement_size',
+			'value'   => $_REQUEST['advert_size'],
 			'compare' => '=',
 		),
-	),	 */
+	),	 
 	'posts_per_page' => $pagenum
 );
 $query = new WP_Query( $args );
@@ -365,8 +370,8 @@ $i = 0;
 
 	<!-- the loop -->
 	<?php while ( $query->have_posts() ) : $query->the_post(); ?>
-	<?php $size = get_post_meta($query->post->ID,'pdftpl2_article_size',true); ?>
-		<div class="col-md-3 addvertisementpost" id="addvertisementpost<?php echo $query->post->ID; ?>" style="margin-bottom:10px; height:100%; cursor:pointer;">
+	<?php $size = get_post_meta($query->post->ID,'pdftpl2_advertisement_size',true); ?>
+		<div class="col-md-3 addvertisementpost" id="addvertisementpost<?php echo $query->post->ID; ?>" style="margin-bottom:10px; height:100%; cursor:pointer;" advert-size="<?php echo $size; ?>">
 			<div class="media" style="border: 1px solid; min-height:290px;">
 			  <div class="" style="width:250px;">
 				<a href="javascript:void(0);" >
@@ -408,7 +413,7 @@ $i = 0;
 	if($query->max_num_pages!=$_REQUEST['pagenum']){
 		
 		if($query->max_num_pages>1){
-		echo "<br /><br /><p align='center'><a href='javascript:void(0);' id='rdyviewerarticles' data-pagi='$currpage'>View More Articles>></a></p>";
+		echo "<br /><br /><p align='center'><a href='javascript:void(0);' id='rdyviewerarticles' data-pagi='$currpage'>View More Advertisement>></a></p>";
 		}
 		
 	}
@@ -526,6 +531,8 @@ function get_csv_listing($newsletterID){
 //proccess step 1 up to 4 form
 function process__pdftemplate_form(){	
 
+	global $advertcost_size_array;
+	
 	$pid = $_POST['pid'];	
 	$user_id = get_current_user_id();
 	
@@ -551,7 +558,74 @@ function process__pdftemplate_form(){
 				
 	}
 	
+
+		
+/* 		formdata.append('quarterpage', quarterpage);			
+	formdata.append('halfpage', halfpage);
+	formdata.append('fullpage', fullpage);		
+*/			
+	if(isset($_POST['quarterpage'])){
+	$quarterpage = intVal($_POST['quarterpage'])*floatVal($advertcost_size_array['quarterpage']);
+	}else{
+		
+		
+		if(get_post_meta($pid,'quarterpage',true)!=""){
+		
+		$quarterpage = intVal(get_post_meta($pid,'quarterpage',true))*floatVal($advertcost_size_array['quarterpage']);
+		
+		}else{
+			
+		$quarterpage = 0.00;	
+		
+		}
+		
 	
+	}
+	
+	if(isset($_POST['halfpage'])){
+		
+	$halfpage = intVal($_POST['halfpage'])*floatVal($advertcost_size_array['halfpage']);
+	
+	}else{
+
+		if(get_post_meta($pid,'halfpage',true)!=""){
+		
+		$halfpage = intVal(get_post_meta($pid,'halfpage',true))*floatVal($advertcost_size_array['halfpage']);
+		
+		}else{
+			
+		$halfpage = 0.00;	
+		
+		}	
+	
+	
+	}
+	
+	if(isset($_POST['fullpage'])){
+		
+	$fullpage = intVal($_POST['fullpage'])*floatVal($advertcost_size_array['fullpage']);
+	
+	}else{
+
+
+		if(get_post_meta($pid,'fullpage',true)!=""){
+		
+		$fullpage = intVal(get_post_meta($pid,'fullpage',true))*floatVal($advertcost_size_array['fullpage']);
+		
+		}else{
+			
+		$fullpage = 0.00;	
+		
+		}	
+
+	
+	}
+	
+	$advertisemententry_cost = floatval($fullpage)+floatval($halfpage)+floatval($quarterpage);
+	
+	update_post_meta($pid, 'advertisemententry_cost', $advertisemententry_cost);
+	
+
 	$pricing__newsletter_pagenum = get_post_meta($pid,'pricing__newsletter_pagenum',true);
 	$pdftvtpl2_printing_type = get_post_meta($pid,'pdftvtpl2_printing_type',true);
 	$pdftvtpl2_delivery_type = get_post_meta($pid,'pdftvtpl2_delivery_type',true);
@@ -559,10 +633,9 @@ function process__pdftemplate_form(){
 	$pdftvtpl2_promotional_leaflets = get_post_meta($pid,'pdftvtpl2_promotional_leaflets',true);
 	$pdftvtpl2_accompanying_letter = get_post_meta($pid,'pdftvtpl2_accompanying_letter',true);
 	$readymadeentry_cost = get_post_meta($pid,'readymadeentry_cost',true);
+	$advertisemententry_cost = get_post_meta($pid,'advertisemententry_cost',true);
 	
-	
-	$totalprice = floatval($pricing__newsletter_pagenum) + floatval($pdftvtpl2_printing_type) + floatval($pdftvtpl2_delivery_type) + floatval($pdftvtpl2_delivery_class) + floatval($pdftvtpl2_promotional_leaflets) + floatval($pdftvtpl2_accompanying_letter) + floatval($readymadeentry_cost);
-	
+	$totalprice = floatval($pricing__newsletter_pagenum) + floatval($pdftvtpl2_printing_type) + floatval($pdftvtpl2_delivery_type) + floatval($pdftvtpl2_delivery_class) + floatval($pdftvtpl2_promotional_leaflets) + floatval($pdftvtpl2_accompanying_letter) + floatval($readymadeentry_cost) + floatval($advertisemententry_cost);
 	
 	
 	
@@ -639,28 +712,6 @@ function update_onradio(){
 		
 	}
 	
-	if(isset($_POST['advertisemententry'])){
-		
-		$advertisemententry_request = $_POST['advertisemententry'];
-		
-		if(intval($advertisemententry_request)==1){
-			
-			$readymadeentry_cost = 0.35;
-			
-		}elseif(intval($advertisemententry_request)==2){
-			
-			$readymadeentry_cost = 0.70;
-			
-		}elseif(intval($advertisemententry_request)>=3){
-
-			$readymadeentry_cost = 1.00;
-		
-		}	
-		
-		update_post_meta($pid, 'readymadeentry_cost', $readymadeentry_cost);
-		
-		
-	}	
 	
 	$pricing__newsletter_pagenum = get_post_meta($pid,'pricing__newsletter_pagenum',true);
 	$pdftvtpl2_printing_type = get_post_meta($pid,'pdftvtpl2_printing_type',true);
@@ -669,9 +720,9 @@ function update_onradio(){
 	$pdftvtpl2_promotional_leaflets = get_post_meta($pid,'pdftvtpl2_promotional_leaflets',true);
 	$pdftvtpl2_accompanying_letter = get_post_meta($pid,'pdftvtpl2_accompanying_letter',true);
 	$readymadeentry_cost = get_post_meta($pid,'readymadeentry_cost',true);
+	$advertisemententry_cost = get_post_meta($pid,'advertisemententry_cost',true);
 	
-	
-	$totalprice = floatval($pricing__newsletter_pagenum) + floatval($pdftvtpl2_printing_type) + floatval($pdftvtpl2_delivery_type) + floatval($pdftvtpl2_delivery_class) + floatval($pdftvtpl2_promotional_leaflets) + floatval($pdftvtpl2_accompanying_letter) + floatval($readymadeentry_cost);
+	$totalprice = floatval($pricing__newsletter_pagenum) + floatval($pdftvtpl2_printing_type) + floatval($pdftvtpl2_delivery_type) + floatval($pdftvtpl2_delivery_class) + floatval($pdftvtpl2_promotional_leaflets) + floatval($pdftvtpl2_accompanying_letter) + floatval($readymadeentry_cost) + floatval($advertisemententry_cost);
 	
 	
 	if($totalprice!=""){	
@@ -928,10 +979,30 @@ function get_readymade_entry(){
 }
 
 
-function get_advertisemet_entry(){
+function get_advertisement_entry(){
+	global $advertcost_size_array;
+	
 	$pid= $_REQUEST['pid'];
-	$advertisemententry = get_post_meta($pid,'advertisemetentry',true);
-	$advertisemententry_cost = get_post_meta($pid,'advertisemetentry_cost',true);
+	
+	/* formdata.append('quarterpage', quarterpage);			
+	formdata.append('halfpage', halfpage);
+	formdata.append('fullpage', fullpage);	
+	 */	
+	 
+	 $quarterpage = get_post_meta($pid,'quarterpage',true);
+	 $halfpage = get_post_meta($pid,'halfpage',true);
+	 $fullpage = get_post_meta($pid,'fullpage',true);
+	 
+	 $quarterpagecost = $quarterpage*floatVal($advertcost_size_array['quarterpage']);
+	 $halfpagecost = $halfpage*floatVal($advertcost_size_array['halfpage']);
+	 $fullpagecost = $fullpage*floatVal($advertcost_size_array['fullpage']);
+	 
+	 $appendtoObject = '{"name":"Quarter Page","count":"'.$quarterpage.'","cost":"'.number_format((float)$quarterpagecost, 2, '.', '').'"},';
+	 $appendtoObject .= '{"name":"Half Page","count":"'.$halfpage.'","cost":"'.number_format((float)$halfpagecost, 2, '.', '').'"},';
+	 $appendtoObject .= '{"name":"Full Page","count":"'.$fullpage.'","cost":"'.number_format((float)$fullpagecost, 2, '.', '').'"}';
+	 
+	/* 	$advertisemententry = get_post_meta($pid,'advertisemententry',true);
+	$advertisemententry_cost = get_post_meta($pid,'advertisemententry_cost',true);
 	if($advertisemententry_cost==0){
 		
 		$advertisemententry_cost = '0.00';
@@ -941,7 +1012,9 @@ function get_advertisemet_entry(){
 		$advertisemententry_cost = number_format((float)$advertisemententry_cost, 2, '.', '');
 		
 	}
-	print_r('{"records":[{"count":"'.$advertisemententry.'","cost":"'.$advertisemententry_cost.'"}]}');
+
+	 */
+	print_r('{"records":['.$appendtoObject.']}');
 		
 	
 	die();

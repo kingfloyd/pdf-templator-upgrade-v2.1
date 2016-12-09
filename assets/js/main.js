@@ -216,10 +216,34 @@ pdfcr(function(){
 				
 			})		
 		
+			var quarterpage = 0;
+			var halfpage = 0;
+			var fullpage = 0;
+			
+			pdfcr('.gridster div[advert-size]').each(function(){
 				
+				if(pdfcr(this).attr('advert-size')=="Quarter Page"){					
+					quarterpage = quarterpage + 1;
+				}
+				if(pdfcr(this).attr('advert-size')=="Half Page"){					
+					halfpage = halfpage + 1;
+				}				
+				if(pdfcr(this).attr('advert-size')=="Full Page"){					
+					fullpage = fullpage + 1;
+				}					
+				
+				
+				
+			})
+			//alert(quarterpage);
 			var formdata = new FormData(this);			
 			formdata.append('readymadeentry', pdfcr('.readymadeentry').length); 
 			formdata.append('advertisemententry', pdfcr('.advertisemententry').length);
+			
+			formdata.append('quarterpage', quarterpage);			
+			formdata.append('halfpage', halfpage);
+			formdata.append('fullpage', fullpage);
+			
 
 			pdfcr.ajax({
 				url: main_script_object.ajax_url,
@@ -609,13 +633,13 @@ pdfcr(function(){
 			);
 	})	
 	//advertisement
-	pdfcr(document).on('change','#specific-advertisement',function(){
+	pdfcr(document).on('change','#specific-advertisement,#pdftpl_advertisement_size',function(){
 			//alert(pdfcr('#pdftpl_article_size').val())
 			pdfcr.post(
 				main_script_object.ajax_url, 
 				{
 					'action': 'get_pdftpl2advertisement',
-					//'article_size': pdfcr('#pdftpl_article_size').val(),
+					'advert_size': pdfcr('#pdftpl_advertisement_size').val(),
 					'catid':   pdfcr('#specific-advertisement').val()
 				}, 
 				function(response){
@@ -960,6 +984,7 @@ pdfcr(function(){
 	
 	pdfcr(document).on('dblclick','.addvertisementpost',function(){
 		
+		var advertSize = pdfcr(this).attr('advert-size');
 		
 		var readymadeid = pdfcr('.addreadyselectoradvert').val();
 		if(readymadeid!=""){
@@ -1006,7 +1031,7 @@ pdfcr(function(){
 						
 						//alert(Math.round(rH))
 						
-						datus.add_widget('<li class="no-resize /*static*/" data-col=""  data-row=""  style="background: rgb(255, 255, 199);"  ><div class="settings-wrap"><button style="float: right;"  class="close-grid" type="button">x</button></div><div class="grid-content-wrap advertisemententry" style="padding:10px;" >'+pdfcr('.advertisementcontentAppend').html()+'</div></li>', 120, rH);	
+						datus.add_widget('<li class="no-resize /*static*/" data-col=""  data-row=""  style="background: rgb(255, 255, 199);"  ><div class="settings-wrap"><button style="float: right;"  class="close-grid" type="button">x</button></div><div class="grid-content-wrap advertisemententry" advert-size="'+advertSize+'" style="padding:10px;" >'+pdfcr('.advertisementcontentAppend').html()+'</div></li>', 120, rH);	
 						
 						
 						
@@ -1097,8 +1122,13 @@ pdfcr(function(){
 	
 	//advertisement functions
 	pdfcr(document).on('click','.addadvertisementbtn',function(){
+		
+		
 			
 		var readymadeid = pdfcr('.addreadyselectoradvert').val();
+		
+		var advertSize = pdfcr('#addvertisementpost'+readymadeid).attr('advert-size');		
+		
 		if(readymadeid!=""){
 			pdfcr.post(
 				main_script_object.ajax_url, 
@@ -1143,7 +1173,7 @@ pdfcr(function(){
 						
 						//alert(Math.round(rH))
 						
-						datus.add_widget('<li class="no-resize /* static*/ " data-col=""  data-row=""  style="background: rgb(255, 255, 199);"  ><div class="settings-wrap"><button style="float: right;"  class="close-grid" type="button">x</button></div><div class="grid-content-wrap advertisemententry" style="padding:10px;" >'+pdfcr('.advertisementcontentAppend').html()+'</div></li>', 120, rH);	
+						datus.add_widget('<li class="no-resize /* static*/ " data-col=""  data-row=""  style="background: rgb(255, 255, 199);"  ><div class="settings-wrap"><button style="float: right;"  class="close-grid" type="button">x</button></div><div class="grid-content-wrap advertisemententry" advert-size="'+advertSize+'" style="padding:10px;" >'+pdfcr('.advertisementcontentAppend').html()+'</div></li>', 120, rH);	
 						
 						
 						
@@ -1314,7 +1344,11 @@ app.controller('pdftpl2Ctrl', function($scope, $http) {
 	//on button click
 	$scope.loadreadymadecontent = function(){
 		
-
+    $http({method:'post',url:main_script_object.ajax_url,params:{pid:main_script_object.newsletter_id,action:'get_advertisement_entry'}}).then(function(response) {
+        $scope.advertisementEntry = response.data.records;
+		$scope._hideObj = false;
+    });	
+	
     $http({method:'post',url:main_script_object.ajax_url,params:{pid:main_script_object.newsletter_id,action:'get_readymade_entry'}}).then(function(response) {
         $scope.readyMadeEntry = response.data.records;
 		$scope._hideObj = false;
@@ -1324,8 +1358,12 @@ app.controller('pdftpl2Ctrl', function($scope, $http) {
 	}
 	//on page load
     $http({method:'post',url:main_script_object.ajax_url,params:{pid:main_script_object.newsletter_id,action:'get_readymade_entry'}}).then(function(response) {
-        $scope.advertisementEntry = response.data.records;
+        $scope.readyMadeEntry = response.data.records;
 		$scope._hideObj = false;
     });	
 	
+    $http({method:'post',url:main_script_object.ajax_url,params:{pid:main_script_object.newsletter_id,action:'get_advertisement_entry'}}).then(function(response) {
+        $scope.advertisementEntry = response.data.records;
+		$scope._hideObj = false;
+    });		
 });
