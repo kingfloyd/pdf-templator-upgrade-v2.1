@@ -473,7 +473,7 @@ pdfcr(function(){
 				
 			}else{
 				
-				//784/120 = 6.5333
+				//784/12 = 6.5333
 				
 			
 				
@@ -488,9 +488,9 @@ pdfcr(function(){
 				//alert(pdfcr(".foredit").outerWidth( true )+"asdasasdsad")
 				
 			if(parseInt(pdfcr(".foredit").outerWidth( true ))>784){
-				var perblock = 784/120;
+				var perblock = 784/12;
 				
-				var newperblock = pdfcr(".foredit").outerWidth( true )/120;
+				var newperblock = pdfcr(".foredit").outerWidth( true )/12;
 				
 				//alert(perblock+" "+newperblock+" "+pdfcr(".foredit").outerWidth( true )+" "+784);
 				
@@ -526,7 +526,7 @@ pdfcr(function(){
 			
 			if(newcontent>1162){
 					pdfcr('.grid-content-wrap',globaleditorpointer).html("");
-					pdfcr(".gridster ul").data('gridster').resize_widget(pdfcr(".foredit"),120,2);
+					pdfcr(".gridster ul").data('gridster').resize_widget(pdfcr(".foredit"),12,2);
 					alert("Sorry cannot add content. Content height exceed the current page content.");
 					
 			}else{
@@ -535,13 +535,13 @@ pdfcr(function(){
 				var rH = (newcontent)/144;
 				//alert(rdymdcontentWidth+" "+rW+" "+rH)
 				
-				if(rW>120){
+				if(rW>12){
 					
-					rW = 120
+					rW = 12
 				}
-				if(rH > 120){
+				if(rH > 12){
 					
-					rH = 120;
+					rH = 12;
 					
 				}
 							
@@ -578,7 +578,7 @@ pdfcr(function(){
 			
 			
 				
-				datus.add_widget('<li data-sizey="2" data-sizex="120" data-col=""  data-row="" style="background: rgb(255, 255, 199);"  ><div class="settings-wrap"><button style="float: right;"  class="close-grid" type="button">x</button><div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal"><img style="height: 20px; margin: 3px;" src="'+pdftvtpl2_plugin_url+'/assets/img/settings-icon.png"></div><div style="float: right;" class="pdftv2-column-content-edit" id="pdftv2-column-content-edit" data-toggle="modal" data-target="#pdftv2-wp-editor"><img style="cursor:pointer;height: 20px;margin: 5px;" src="'+pdftvtpl2_plugin_url+'/assets/img/edit-icon.png"></div></div><div class="grid-content-wrap" style="padding:10px;" ></div></li>', parseInt(value), 1);			
+				datus.add_widget('<li data-sizey="2" data-sizex="12" data-col=""  data-row="" style="background: rgb(255, 255, 199);"  ><div class="settings-wrap"><button style="float: right;"  class="close-grid" type="button">x</button><div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal"><img style="height: 20px; margin: 3px;" src="'+pdftvtpl2_plugin_url+'/assets/img/settings-icon.png"></div><div style="float: right;" class="pdftv2-column-content-edit" id="pdftv2-column-content-edit" data-toggle="modal" data-target="#pdftv2-wp-editor"><img style="cursor:pointer;height: 20px;margin: 5px;" src="'+pdftvtpl2_plugin_url+'/assets/img/edit-icon.png"></div></div><div class="grid-content-wrap" style="padding:10px;" ></div></li>', parseInt(value), 1);			
 				
 	
 			});								
@@ -659,7 +659,7 @@ pdfcr(function(){
 		var datus = eval('gridster'+selectedpd[1]);		
 		datus.remove_all_widgets();
 
-		datus.add_widget('<li data-sizey="2" data-sizex="120" data-col=""  data-row="" style="background: rgb(255, 255, 199);"  ><div class="settings-wrap"><button style="float: right;"  class="close-grid" type="button">x</button><div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal"><img style="height: 20px; margin: 3px;" src="'+pdftvtpl2_plugin_url+'/assets/img/settings-icon.png"></div><div style="float: right;" class="pdftv2-column-content-edit" id="pdftv2-column-content-edit" data-toggle="modal" data-target="#pdftv2-wp-editor"><img style="cursor:pointer;height: 20px;margin: 5px;" src="'+pdftvtpl2_plugin_url+'/assets/img/edit-icon.png"></div></div><div class="grid-content-wrap" style="padding:10px;" >'+tinyMCE.get('mycustomeditor2').getContent()+'</div></li>', 120, 120);	
+		datus.add_widget('<li data-sizey="2" data-sizex="12" data-col=""  data-row="" style="background: rgb(255, 255, 199);"  ><div class="settings-wrap"><button style="float: right;"  class="close-grid" type="button">x</button><div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal"><img style="height: 20px; margin: 3px;" src="'+pdftvtpl2_plugin_url+'/assets/img/settings-icon.png"></div><div style="float: right;" class="pdftv2-column-content-edit" id="pdftv2-column-content-edit" data-toggle="modal" data-target="#pdftv2-wp-editor"><img style="cursor:pointer;height: 20px;margin: 5px;" src="'+pdftvtpl2_plugin_url+'/assets/img/edit-icon.png"></div></div><div class="grid-content-wrap" style="padding:10px;" >'+tinyMCE.get('mycustomeditor2').getContent()+'</div></li>', 12, 12);	
 		
 		
 	})
@@ -946,19 +946,19 @@ pdfcr(function(){
 						var rH = (totalnewcontentheight)/140;
 						//alert(rdymdcontentWidth+" "+rW+" "+rH)
 						
-						if(rW>120){
+						if(rW>12){
 							
-							rW = 120
+							rW = 12
 						}
-						if(rH > 120){
+						if(rH > 12){
 							
-							rH = 120;
+							rH = 12;
 							
 						}
 						
 						//alert(Math.round(rH))
 						
-						datus.add_widget('<li class=" /*no-resize static*/ " data-col=""  data-row=""  style="background: rgb(255, 255, 199);"  ><div class="settings-wrap"><button style="float: right;"  class="close-grid" type="button">x</button><div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal"><img style="height: 20px; margin: 3px;" src="'+pdftvtpl2_plugin_url+'/assets/img/settings-icon.png"></div></div><div class="grid-content-wrap readymadeentry" style="padding:10px;" >'+pdfcr('.readymadecontentAppend').html()+'</div></li>', 120, rH);	
+						datus.add_widget('<li class=" /*no-resize static*/ " data-col=""  data-row=""  style="background: rgb(255, 255, 199);"  ><div class="settings-wrap"><button style="float: right;"  class="close-grid" type="button">x</button><div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal"><img style="height: 20px; margin: 3px;" src="'+pdftvtpl2_plugin_url+'/assets/img/settings-icon.png"></div></div><div class="grid-content-wrap readymadeentry" style="padding:10px;" >'+pdfcr('.readymadecontentAppend').html()+'</div></li>', 12, rH);	
 						
 						
 						
@@ -1019,19 +1019,19 @@ pdfcr(function(){
 						var rH = (totalnewcontentheight)/140;
 						//alert(rdymdcontentWidth+" "+rW+" "+rH)
 						
-						if(rW>120){
+						if(rW>12){
 							
-							rW = 120
+							rW = 12
 						}
-						if(rH > 120){
+						if(rH > 12){
 							
-							rH = 120;
+							rH = 12;
 							
 						}
 						
 						//alert(Math.round(rH))
 						
-						datus.add_widget('<li class="no-resize /*static*/" data-col=""  data-row=""  style="background: rgb(255, 255, 199);"  ><div class="settings-wrap"><button style="float: right;"  class="close-grid" type="button">x</button></div><div class="grid-content-wrap advertisemententry" advert-size="'+advertSize+'" style="padding:10px;" >'+pdfcr('.advertisementcontentAppend').html()+'</div></li>', 120, rH);	
+						datus.add_widget('<li class="no-resize /*static*/" data-col=""  data-row=""  style="background: rgb(255, 255, 199);"  ><div class="settings-wrap"><button style="float: right;"  class="close-grid" type="button">x</button></div><div class="grid-content-wrap advertisemententry" advert-size="'+advertSize+'" style="padding:10px;" >'+pdfcr('.advertisementcontentAppend').html()+'</div></li>', 12, rH);	
 						
 						
 						
@@ -1088,19 +1088,19 @@ pdfcr(function(){
 						var rH = (totalnewcontentheight)/140;
 						//alert(rdymdcontentWidth+" "+rW+" "+rH)
 						
-						if(rW>120){
+						if(rW>12){
 							
-							rW = 120
+							rW = 12
 						}
-						if(rH > 120){
+						if(rH > 12){
 							
-							rH = 120;
+							rH = 12;
 							
 						}
 						
 						//alert(Math.round(rH))
 						
-						datus.add_widget('<li class=" /*no-resize static*/ " data-col=""  data-row=""  style="background: rgb(255, 255, 199);"  ><div class="settings-wrap"><button style="float: right;"  class="close-grid" type="button">x</button><div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal"><img style="height: 20px; margin: 3px;" src="'+pdftvtpl2_plugin_url+'/assets/img/settings-icon.png"></div></div><div class="grid-content-wrap readymadeentry" style="padding:10px;" >'+pdfcr('.readymadecontentAppend').html()+'</div></li>', 120, rH);	
+						datus.add_widget('<li class=" /*no-resize static*/ " data-col=""  data-row=""  style="background: rgb(255, 255, 199);"  ><div class="settings-wrap"><button style="float: right;"  class="close-grid" type="button">x</button><div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal"><img style="height: 20px; margin: 3px;" src="'+pdftvtpl2_plugin_url+'/assets/img/settings-icon.png"></div></div><div class="grid-content-wrap readymadeentry" style="padding:10px;" >'+pdfcr('.readymadecontentAppend').html()+'</div></li>', 12, rH);	
 						
 						
 						
@@ -1161,19 +1161,19 @@ pdfcr(function(){
 						var rH = (totalnewcontentheight)/140;
 						//alert(rdymdcontentWidth+" "+rW+" "+rH)
 						
-						if(rW>120){
+						if(rW>12){
 							
-							rW = 120
+							rW = 12
 						}
-						if(rH > 120){
+						if(rH > 12){
 							
-							rH = 120;
+							rH = 12;
 							
 						}
 						
 						//alert(Math.round(rH))
 						
-						datus.add_widget('<li class="no-resize /* static*/ " data-col=""  data-row=""  style="background: rgb(255, 255, 199);"  ><div class="settings-wrap"><button style="float: right;"  class="close-grid" type="button">x</button></div><div class="grid-content-wrap advertisemententry" advert-size="'+advertSize+'" style="padding:10px;" >'+pdfcr('.advertisementcontentAppend').html()+'</div></li>', 120, rH);	
+						datus.add_widget('<li class="no-resize /* static*/ " data-col=""  data-row=""  style="background: rgb(255, 255, 199);"  ><div class="settings-wrap"><button style="float: right;"  class="close-grid" type="button">x</button></div><div class="grid-content-wrap advertisemententry" advert-size="'+advertSize+'" style="padding:10px;" >'+pdfcr('.advertisementcontentAppend').html()+'</div></li>', 12, rH);	
 						
 						
 						

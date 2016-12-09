@@ -61,7 +61,7 @@
 		
 		for($i=1;$i<=$totalelements;$i++){
 			
-			$array_initial_val[$i] = '<li class="gs-w" data-sizey="2" data-sizex="120" data-col="1" data-row="1" style="background: rgb(255, 255, 199) none repeat scroll 0% 0%; margin-top: auto; margin-bottom: auto; position: absolute; top: 5px; left: 5px;">							
+			$array_initial_val[$i] = '<li class="gs-w" data-sizey="2" data-sizex="12" data-col="1" data-row="1" style="background: rgb(255, 255, 199) none repeat scroll 0% 0%; margin-top: auto; margin-bottom: auto; position: absolute; top: 5px; left: 5px;">							
 										<div class="settings-wrap">
 											<button style="float: right;"  class="close-grid" type="button">x</button>
 											<div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal">
@@ -75,7 +75,7 @@
 										</div>								
 									</li>';
 									
-			$array_initial_val2[$i] = '<div class="gs-w" data-sizey="2" data-sizex="120" data-col="3" data-row="1" style="padding: 10px; background: rgb(255, 255, 199) none repeat scroll 0% 0%; margin-top: auto; margin-bottom: auto; min-height: auto; position:absolute; top:5px; left:5px; width:762px; height:265px;">						
+			$array_initial_val2[$i] = '<div class="gs-w" data-sizey="2" data-sizex="12" data-col="3" data-row="1" style="padding: 10px; background: rgb(255, 255, 199) none repeat scroll 0% 0%; margin-top: auto; margin-bottom: auto; min-height: auto; position:absolute; top:5px; left:5px; width:762px; height:265px;">						
 										<div class="grid-content-wrap">								
 										</div>								
 									</div>';									
@@ -554,7 +554,7 @@ box-sizing: border-box;
 					<br>		    
 					<div id="pdfpagewrap<?php echo $i; ?>" class="pdfwrapper gridster">
 						<ul>
-							<li data-sizey="2" data-sizex="120" data-col="3" data-row="1">						
+							<li data-sizey="2" data-sizex="12" data-col="3" data-row="1">						
 									<div class="settings-wrap">
 										<button style="float: right;"  class="close-grid" type="button">x</button>
 										<div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal">

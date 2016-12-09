@@ -42,7 +42,7 @@ $pagesnum = count($pdfpage_contents);
 
 ?>
 
-
+<link rel="stylesheet" type="text/css" href="<?php echo pdftvtpl2_plugin_url; ?>/assets/css/demo.css">
 <link rel="stylesheet" type="text/css" href="<?php echo pdftvtpl2_plugin_url; ?>/assets/css/jquery.gridster.min.css">
 <link rel="stylesheet" type="text/css" href="<?php echo pdftvtpl2_plugin_url; ?>/assets/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -201,10 +201,10 @@ box-sizing: border-box !important;
 
             widget_base_dimensions: ['auto', 140],           
 			
-			min_rows:1,
-			min_cols: 1,
-			max_cols: 120,
-			max_rows: 120,
+			min_rows:3,
+			min_cols: 3,
+			max_cols: 12,
+			max_rows: 12,
 			widget_margins: [5, 5],
 			
 			resize: {
@@ -272,7 +272,7 @@ box-sizing: border-box !important;
 						
 			}else{
 		
-			gridster<?php echo $i; ?>.add_widget('<li data-sizey="2" data-sizex="120" data-col="3" data-row="1" style="background: rgb(255, 255, 199);"  ><div class="settings-wrap"><button style="float: right;"  class="close-grid" type="button">x</button><div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal"><img style="height: 20px; margin: 3px;" src="<?php echo pdftvtpl2_plugin_url; ?>/assets/img/settings-icon.png"></div><div style="float: right;" class="pdftv2-column-content-edit" id="pdftv2-column-content-edit" data-toggle="modal" data-target="#pdftv2-wp-editor"><img style="cursor:pointer;height: 20px;margin: 5px;" src="<?php echo pdftvtpl2_plugin_url; ?>/assets/img/edit-icon.png"></div></div><div class="grid-content-wrap" style="padding:10px; "></div></li>', 120, 1);	
+			gridster<?php echo $i; ?>.add_widget('<li data-sizey="2" data-sizex="12" data-col="3" data-row="1" style="background: rgb(255, 255, 199);"  ><div class="settings-wrap"><button style="float: right;"  class="close-grid" type="button">x</button><div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal"><img style="height: 20px; margin: 3px;" src="<?php echo pdftvtpl2_plugin_url; ?>/assets/img/settings-icon.png"></div><div style="float: right;" class="pdftv2-column-content-edit" id="pdftv2-column-content-edit" data-toggle="modal" data-target="#pdftv2-wp-editor"><img style="cursor:pointer;height: 20px;margin: 5px;" src="<?php echo pdftvtpl2_plugin_url; ?>/assets/img/edit-icon.png"></div></div><div class="grid-content-wrap" style="padding:10px; "></div></li>', 120, 1);	
 			
 			}
 			
