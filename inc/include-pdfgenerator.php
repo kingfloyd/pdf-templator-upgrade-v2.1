@@ -12,7 +12,7 @@ function generate_pdf(){
 	$post_name =  $urlArray[count($urlArray)-2];
 
 	//helper_print( "post name " . $post_name);
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/wp-load.php';
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/practice/wordpress/wp-load.php';
 
 	if(in_array('pdftemplate', $urlArray)) {
 		//    helper_print( "print pdf");

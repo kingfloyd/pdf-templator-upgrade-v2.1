@@ -482,7 +482,7 @@ $content = str_replace(']]>', ']]&gt;', $content);
 
 function pdftemplator_enqueue() {
 	
-	if($_REQUEST['newsletter_id']!=""){
+	if(isset($_REQUEST['newsletter_id']) && $_REQUEST['newsletter_id']!=""){
 		
 		$nid = $_REQUEST['newsletter_id'];
 	}else{
@@ -498,15 +498,15 @@ function pdftemplator_enqueue() {
 
 
 function generate_pdftvtpl2_url(){
-	global $pdftvtpl2_allfields_default;
-	
-	global $post;
-	
-	$data = site_url()."/create-newsletter?newsletter_id=".$_REQUEST['newsletter_id']."&".http_build_query($pdftvtpl2_allfields_default);
-	
-	return $data;
-	
+	if(isset($_REQUEST['newsletter_id'])) {
+		global $pdftvtpl2_allfields_default;
 
+		global $post;
+
+		$data = site_url() . "/create-newsletter?newsletter_id=" . $_REQUEST['newsletter_id'] . "&" . http_build_query($pdftvtpl2_allfields_default);
+
+		return $data;
+	}
 }
 
 function get_csv_listing_head(){
