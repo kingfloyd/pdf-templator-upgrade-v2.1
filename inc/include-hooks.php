@@ -72,6 +72,10 @@ add_action( 'wp_ajax_nopriv_get_readymade_entry', 'get_readymade_entry' );
 add_action( 'wp_ajax_get_advertisement_entry', 'get_advertisement_entry' );
 add_action( 'wp_ajax_nopriv_get_advertisement_entry', 'get_advertisement_entry' );
 
+
+add_action( 'wp_ajax_get_pdftpl_a4a5', 'get_pdftpl_a4a5' );
+add_action( 'wp_ajax_nopriv_get_pdftpl_a4a5', 'get_pdftpl_a4a5' );
+
 // Comments
 //add_filter('comment_form_default_fields', 'pdftvtpl2_comment_remove_url_input');
 

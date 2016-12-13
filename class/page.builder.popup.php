@@ -25,6 +25,7 @@ class PopUpPageBuilder extends PageBuilder{
 		$this->viewcsvlist();
 		$this->viewdefaultvalues();
 		$this->showReadyAdvertisementTemplates();
+        $this->pop_up_display_delivery_a4_a5();
     }
 
     public function showTextEditor(){}
@@ -105,37 +106,37 @@ class PopUpPageBuilder extends PageBuilder{
                     </div>
                     <div class="modal-body">
                         <?php $post_types = get_post_types(); ?>
-						
+
 				<div class="form-group">
-				 
+
 				   <div class="row">
 					  <div class="col-sm-6">
-						 <label for="email">Readymade Content Categories</label>					  
+						 <label for="email">Readymade Content Categories</label>
 							<?php
 
 							$terms = get_terms( 'pdfReadymade', array(
 								'orderby'    => 'count',
 								'hide_empty' => 0,
 								'number' => 8
-								
+
 							) );
 
 
 							?>
-							 
-				  
+
+
 						  <select id="specific-readymadecat" class="form-control" name="watermarkposttype" <?php if(get_option('imgws_watermark_post_type')=="specific_post"): echo "style='display:block;'"; endif; ?> autocomplete='off'>
 							<option>---Select One---</option>
 							<?php if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){  ?>
 							<?php   foreach ( $terms as $term ) { ?>
 							<option value="<?php echo $term->term_id; ?>"><?php echo $term->name; ?></option>
-							
-							
+
+
 								<?php } ?>
 							<?php } ?>
 							<option value="Most Popular Articles">Most Popular Articles</option>
-						  </select>					  
-					  
+						  </select>
+
 					  </div>
 					  <div class="col-sm-6 readymadebtn-wrapper">
 						 <label for="email">Article Size</label>
@@ -143,17 +144,17 @@ class PopUpPageBuilder extends PageBuilder{
 							<option>All Sizes</option>
 							<option>Quarter Page</option>
 							<option>Half Page</option>
-						  </select>								
-					  </div>	
+						  </select>
+					  </div>
 					  <div class="clearfix"></div><br />
 					  <div class="listcontainer">
-					  </div>	 
+					  </div>
 					<div class="clearfix"></div>
 				  </div>
-				</div>						
+				</div>
 
-						
-						
+
+
                     </div>
                     <div class="modal-footer">
 						<input type="button" class="btn btn-danger addreadymadebtn" value="Insert Content" />
@@ -179,55 +180,55 @@ class PopUpPageBuilder extends PageBuilder{
                     </div>
                     <div class="modal-body">
                         <?php $post_types = get_post_types(); ?>
-						
+
 				<div class="form-group">
-				 
+
 				   <div class="row">
 					  <div class="col-sm-6">
-						 <label for="email">Advertisement Content Categories</label>					  
+						 <label for="email">Advertisement Content Categories</label>
 							<?php
 
 							$terms = get_terms( 'pdftpl2advertisement', array(
 								'orderby'    => 'count',
 								'hide_empty' => 0,
 								'number' => 8
-								
+
 							) );
 
 
 							?>
-							 
-				  
+
+
 						  <select id="specific-advertisement" class="form-control" name="watermarkposttype" <?php if(get_option('imgws_watermark_post_type')=="specific_post"): echo "style='display:block;'"; endif; ?> autocomplete='off'>
 							<option>---Select One---</option>
 							<?php if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){  ?>
 							<?php   foreach ( $terms as $term ) { ?>
 							<option value="<?php echo $term->term_id; ?>"><?php echo $term->name; ?></option>
-							
-							
+
+
 								<?php } ?>
 							<?php } ?>
 							<option value="Most Popular Articles">Most Popular Articles</option>
-						  </select>					  
-					  
+						  </select>
+
 					  </div>
-					  <!--<div class="col-sm-6 readymadebtn-wrapper">
+					  <div class="col-sm-6 readymadebtn-wrapper">
 						 <label for="email">Article Size</label>
-						  <select class="form-control" id="pdftpl_article_size" name="article_size" autocomplete='off'>
-							<option>All Sizes</option>
-							<option>Quarter Page</option>
-							<option>Half Page</option>
-						  </select>								
-					  </div>-->	
+						  <select class="form-control" id="pdftpl_advertisement_size" name="advert_size" autocomplete='off'>
+								<option>Quarter Page</option>
+								<option>Half Page</option>
+								<option>Full Page </option>
+						  </select>
+					  </div>
 					  <div class="clearfix"></div><br />
 					  <div class="listcontaineradvertisement">
-					  </div>	 
+					  </div>
 					<div class="clearfix"></div>
 				  </div>
-				</div>						
+				</div>
 
-						
-						
+
+
                     </div>
                     <div class="modal-footer">
 						<input type="button" class="btn btn-danger addadvertisementbtn" value="Insert Content" />
@@ -263,48 +264,48 @@ class PopUpPageBuilder extends PageBuilder{
                             <div class="col-sm-3 pdftv2-popup-shortcodes pre-scrollable" >
                                 <ul class="list-group">
 								<?php
-								
+
 								global $pdftvtpl2_short;
-								
+
 								foreach($pdftvtpl2_short as $shortfield){
-									
+
 								?>
-									<li class="list-group-item" style="cursor:pointer;" data-value="<?php echo "{".$shortfield."}" ?>"><?php echo $shortfield; ?></li> 	
+									<li class="list-group-item" style="cursor:pointer;" data-value="<?php echo "{".$shortfield."}" ?>"><?php echo $shortfield; ?></li>
 								<?php
-									
+
 								}
-								
-								
-								
+
+
+
 								?>
-										
-								<!--							
+
+								<!--
 								<?php $headerstofields = get_post_meta($_REQUEST['newsletter_id'],'customer_list_head',true); ?>
 								<?php if(is_array($headerstofields) or $headerstofields!=""){ ?>
-								
-									<?php foreach($headerstofields as $headerstofield): ?>											
-									
-										<li class="list-group-item" style="cursor:pointer;" data-value="{<?php echo $headerstofield; ?>}"><?php echo $headerstofield; ?></li>                                    										
-										
+
+									<?php foreach($headerstofields as $headerstofield): ?>
+
+										<li class="list-group-item" style="cursor:pointer;" data-value="{<?php echo $headerstofield; ?>}"><?php echo $headerstofield; ?></li>
+
 									<?php endforeach; ?>
-									
+
 								<?php }elseif(get_post_meta($_REQUEST['newsletter_id'],'httpfile',true)!=""){ ?>
-									
-								<?php 
+
+								<?php
 										$parts = parse_url(get_post_meta($_REQUEST['newsletter_id'],'httpfile',true));
 										parse_str($parts['query'], $queryGET);
-								?>		
+								?>
 										<?php if(is_array($queryGET) or $queryGET!=""){ ?>
 
-										<?php foreach($queryGET as $queryGETKey=>$queryGETVal): ?>												
-											
-										<li class="list-group-item" style="cursor:pointer;" data-value="{<?php echo $queryGETVal; ?>}"><?php echo $queryGETKey; ?></li>               	
-											
+										<?php foreach($queryGET as $queryGETKey=>$queryGETVal): ?>
+
+										<li class="list-group-item" style="cursor:pointer;" data-value="{<?php echo $queryGETVal; ?>}"><?php echo $queryGETKey; ?></li>
+
 										<?php endforeach ?>
-									
+
 										<?php } ?>
-								
-										
+
+
 								<?php } ?>
 									-->
                                 </ul>
@@ -333,31 +334,31 @@ class PopUpPageBuilder extends PageBuilder{
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title">Default Values</h4>
 						<?php
-						if( current_user_can('editor') || current_user_can('administrator') ) {  
+						if( current_user_can('editor') || current_user_can('administrator') ) {
 						echo "<a href='".site_url()."/wp-admin/admin.php?page=pdftpl-default-news-values&newsletter_id=".$_GET['newsletter_id']."'>Click Here to Edit default values</a>";
 						}
-						
+
 						?>
 					</div>
 					<div class="modal-body">
-						
+
 						<table class="table">
 							<tr><td><b>Custom Field</b></td><td><b>Default Value</b></td></tr>
-							<?php 
+							<?php
 							global $pdftvtpl2_allfields_defaults;
 							foreach($pdftvtpl2_allfields_defaults as $key=>$val){
-								
-								
-							echo "<tr><td>".$key."</td><td>".$val."</td></tr>";	
-								
-								
-								
-								
-								
+
+
+							echo "<tr><td>".$key."</td><td>".$val."</td></tr>";
+
+
+
+
+
 							}
-							
-							
-							
+
+
+
 							?>
 						</table>
 					</div>
@@ -367,8 +368,8 @@ class PopUpPageBuilder extends PageBuilder{
 				</div>
 
 			</div>
-		</div>		
-		
+		</div>
+
         <?php
     }
     public function showColumnDelete(){
@@ -530,57 +531,57 @@ class PopUpPageBuilder extends PageBuilder{
 										<option value="mm">millimetres</option>
 										<option value="px">pixels</option>
 										<!--
-										
+
 										784 / 120 =  6.533333333333333
 										-->
 									</select>
-								</div>								 
-							</div>		
-										
-						</div>	
+								</div>
+							</div>
+
+						</div>
 						<div class="form-group col-md-6">
 							<label for="gridbackground-color">Text Box Color:</label>
-							<div class="input-group colorpicker-component withcolor"> 
+							<div class="input-group colorpicker-component withcolor">
 								<input type="text" value="#00AABB" id="gridtext-color" class="form-control" />
-								<span class="input-group-addon"><i></i></span> 
-							</div>			
-						</div>						
-						
+								<span class="input-group-addon"><i></i></span>
+							</div>
+						</div>
+
 						<div class="clearfix"></div>
 						  <!--<div class="form-group col-md-12">
 							<label for="email">Grid Background Color:</label>
 							<input  class="form-control"style="width: 15%;"  type="color" name="favcolor" id="gridbackground-color" value="#ffffc7">
 						  </div>-->
-						  
-						  
-						<div class="form-group col-md-6" style="padding-right:0;"> 
+
+
+						<div class="form-group col-md-6" style="padding-right:0;">
 							<label for="email">Text Box Background Image:</label><br /><br />
 							Url&nbsp;<input type="radio" name="Gridbgimage" value="url" autocomplete="off" /> &nbsp;&nbsp; Upload&nbsp;<input name="Gridbgimage" type="radio" value="upload" autocomplete="off" />
 						</div>
 						<div class="form-group col-md-6">
 							<label for="email">Text Box Background Color:</label>
-							<div class="input-group colorpicker-component withcolor"> 
+							<div class="input-group colorpicker-component withcolor">
 								<input type="text" value="#00AABB" id="gridbackground-color" class="form-control" />
-								<span class="input-group-addon"><i></i></span> 
-							</div>			
-						</div>						
-						<div class="clearfix"></div> 
+								<span class="input-group-addon"><i></i></span>
+							</div>
+						</div>
+						<div class="clearfix"></div>
 						 <div id="backgroundurlwraP" class="form-group col-md-6" style="padding-right:0;">
 							<input  class="form-control" type="text" name="favcolor" id="gridbackground-image" value="" placeholder="sample: http://sample.com/images/img1.jpg">
 							<small>Only JPG, PNG and GIF files allowed.</small>
-						 </div>		
-						 <div id="backgrounduploadwraP" class="form-group col-md-12" style="padding-left:0;">		
+						 </div>
+						 <div id="backgrounduploadwraP" class="form-group col-md-12" style="padding-left:0;">
 							<label for="email"></label>
 							<button class="btn btn-danger" type="button" name="buttonimage" id="uploadimg">Upload image</button>
 							<span id="uploadedtext"></span>
-						  </div><br />	
-						  
-						  
-						  
-						  
-						<div class="clearfix"></div> 
+						  </div><br />
 
-						<div class="clearfix"></div> 
+
+
+
+						<div class="clearfix"></div>
+
+						<div class="clearfix"></div>
 						<!--<div class="form-group col-md-12">
 						<label for="email">Grid Text Color:</label>
 						 <input  class="form-control"style="width: 15%;"  type="color" name="gridtext" id="gridtext-color" value="#000000">
@@ -592,14 +593,14 @@ class PopUpPageBuilder extends PageBuilder{
 						</div>
 						<div class="form-group col-md-6">
 							<label for="gridbordercolor">Grid Border Color:</label>
-							<div class="input-group colorpicker-component withcolor"> 
+							<div class="input-group colorpicker-component withcolor">
 								<input type="text" value="#00AABB" id="gridbordercolor" class="form-control" />
-								<span class="input-group-addon"><i></i></span> 
-							</div>			
+								<span class="input-group-addon"><i></i></span>
+							</div>
 						</div>
-						<div class="clearfix"></div> 
+						<div class="clearfix"></div>
 
-						 
+
 						  <!--<div class="form-group col-md-12">
 							<label for="email">Grid Border Color:</label>
 							<input  class="form-control"style="width: 15%;"  type="color" name="bordercolor" id="gridbordercolor" value="">
@@ -614,12 +615,12 @@ class PopUpPageBuilder extends PageBuilder{
 								<option>double</option>
 								<option>dashed</option>
 								<option>inset</option>
-								<option>outset</option>								
+								<option>outset</option>
 							 </select>-->
 								<div>
 									<div class="form-group col-md-1" style="width:5%; padding:0;" >
 									<input type="radio" name="gridbordertype" id="gridbordertype" checked value="" autocomplete="off" /><br /><br />
-									</div>							
+									</div>
 									<div class="form-group col-md-11" style="padding:0;">
 									<div style="text-align:left;">None</div>
 									</div>
@@ -633,7 +634,7 @@ class PopUpPageBuilder extends PageBuilder{
 									<div class="form-group col-md-11" style="padding:0; padding-top:4px;">
 									<div style="border-top:12px dotted #000"></div><br /><br />
 									</div>
-								</div>							
+								</div>
 								<div class="clearfix"></div>
 								<div>
 									<div class="form-group col-md-1" style="width:5%; padding:0;">
@@ -642,8 +643,8 @@ class PopUpPageBuilder extends PageBuilder{
 									<div class="form-group col-md-11" style="padding:0; padding-top:4px;">
 										<div style="border-top:12px solid #000"></div><br /><br />
 									</div>
-								</div>							
-								<div class="clearfix"></div>							
+								</div>
+								<div class="clearfix"></div>
 								<div>
 									<div class="form-group col-md-1" style="width:5%; padding:0;">
 										<input type="radio" name="gridbordertype" id="gridbordertype" value="double" autocomplete="off" />
@@ -651,8 +652,8 @@ class PopUpPageBuilder extends PageBuilder{
 									<div class="form-group col-md-11" style="padding:0; padding-top:4px;">
 										<div style="border-top:12px double #000"></div><br /><br />
 									</div>
-								</div>							
-								<div class="clearfix"></div>									
+								</div>
+								<div class="clearfix"></div>
 
 								<div>
 									<div class="form-group col-md-1" style="width:5%; padding:0;">
@@ -661,8 +662,8 @@ class PopUpPageBuilder extends PageBuilder{
 									<div class="form-group col-md-11" style="padding:0; padding-top:4px;">
 										<div style="border-top:12px dashed #000"></div><br /><br />
 									</div>
-								</div>							
-								<div class="clearfix"></div>							
+								</div>
+								<div class="clearfix"></div>
 
 								<div>
 									<div class="form-group col-md-1" style="width:5%; padding:0;">
@@ -679,10 +680,10 @@ class PopUpPageBuilder extends PageBuilder{
 									<div class="form-group col-md-11" style="padding:0; padding-top:4px;">
 										<div style="border-top:12px outset #000"></div><br /><br />
 									</div>
-								</div>				
-								<div class="clearfix"></div>								 
-						  </div>							  
-						  
+								</div>
+								<div class="clearfix"></div>
+						  </div>
+
 
 						  <div class="form-group col-md-6">
 							<label for="email">Grid Border Size:</label><br /><br />
@@ -690,7 +691,7 @@ class PopUpPageBuilder extends PageBuilder{
 							<div>
 								<div class="form-group col-md-1" style="width:5%; padding:0;" >
 								<input type="radio" name="gridbordersize" id="gridbordersize" checked value="" autocomplete="off" /><br /><br />
-								</div>							
+								</div>
 								<div class="form-group col-md-11" style="padding:0;">
 								<div style="text-align:left;">None</div>
 								</div>
@@ -704,7 +705,7 @@ class PopUpPageBuilder extends PageBuilder{
 								<div class="form-group col-md-11" style="padding:0; padding-top:9px;">
 								<div style="border-top:1px solid #000"></div><br /><br />
 								</div>
-							</div>							
+							</div>
 							<div class="clearfix"></div>
 							<div>
 								<div class="form-group col-md-1" style="width:5%; padding:0;">
@@ -713,8 +714,8 @@ class PopUpPageBuilder extends PageBuilder{
 								<div class="form-group col-md-11" style="padding:0; padding-top:9px;">
 									<div style="border-top:4px solid #000"></div><br /><br />
 								</div>
-							</div>							
-							<div class="clearfix"></div>							
+							</div>
+							<div class="clearfix"></div>
 							<div>
 								<div class="form-group col-md-1" style="width:5%; padding:0;">
 									<input type="radio" name="gridbordersize" id="gridbordersize" value="6" autocomplete="off" />
@@ -722,8 +723,8 @@ class PopUpPageBuilder extends PageBuilder{
 								<div class="form-group col-md-11" style="padding:0; padding-top:7px;">
 									<div style="border-top:6px solid #000"></div><br /><br />
 								</div>
-							</div>							
-							<div class="clearfix"></div>									
+							</div>
+							<div class="clearfix"></div>
 
 							<div>
 								<div class="form-group col-md-1" style="width:5%; padding:0;">
@@ -732,8 +733,8 @@ class PopUpPageBuilder extends PageBuilder{
 								<div class="form-group col-md-11" style="padding:0; padding-top:6px;">
 									<div style="border-top:9px solid #000"></div><br /><br />
 								</div>
-							</div>							
-							<div class="clearfix"></div>							
+							</div>
+							<div class="clearfix"></div>
 
 							<div>
 								<div class="form-group col-md-1" style="width:5%; padding:0;">
@@ -742,24 +743,24 @@ class PopUpPageBuilder extends PageBuilder{
 								<div class="form-group col-md-11" style="padding:0; padding-top:4px;">
 									<div style="border-top:12px solid #000"></div><br /><br />
 								</div>
-							</div>							
-							<div class="clearfix"></div>							
-						  </div>						  
-						  						  
-	
-						 
+							</div>
+							<div class="clearfix"></div>
+						  </div>
+
+
+
 							<div class="clearfix"></div>
 
                         </div>
                         <div class="modal-footer">
 							<button type="button" class="btn btn-default" id="pdftv2-settings-preview" data-toggle="modal" data-target="#pdftv2-column-settings-preview">Preview</button>
-							
+
                             <button type="button" class="btn btn-default" data-dismiss="modal" id="pdftv2-settings-editing-done">Done</button>
                         </div>
                     </div>
                 </div>
             </div>
-			
+
 			<div class="modal fade bs-example-modal-lg pdftv2-column-settings-preview in" id="pdftv2-column-settings-preview" role="dialog">
                 <div class="modal-dialog modal-lg">
 
@@ -770,7 +771,7 @@ class PopUpPageBuilder extends PageBuilder{
                             <h4 class="modal-title">Grid Settings Preview</h4>
                         </div>
                         <div class="modal-body">
-							
+
 							<div class="settings-preview-div">
 							Sample Text
 							</div>
@@ -781,15 +782,15 @@ class PopUpPageBuilder extends PageBuilder{
                         </div>
                     </div>
                 </div>
-            </div>			
-			
+            </div>
+
         <?php
     }
-	
-	
+
+
 	public function viewcsvlist(){
-	
-	?>	
+
+	?>
         <div class="modal fade bs-example-modal-lg" id="viewcsvlist" role="dialog">
             <div class="modal-dialog modal-lg">
 
@@ -812,19 +813,81 @@ class PopUpPageBuilder extends PageBuilder{
                 </div>
 
             </div>
-        </div>		
-		
+        </div>
+
 	<?php
-		
+
 	}
-	
+
+
+    public function pop_up_display_delivery_a4_a5(){
+
+    ?>
+        <div class="modal fade bs-example-modal-lg delivery_a4a5" id="delivery_a4a5" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <!--<div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"></h4>
+                    </div>-->
+                    <div class="modal-body">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                            <img  src="<?php echo pdftvtpl2_plugin_url; ?>/assets/img/a4a5.png" /><br /><br />
+                            <p align="center">1x A4 is the same as 2x A5</p>
+                            </div>
+                            <div class="col-md-8">
+                                <h1>How Would You Like Your Newsletters Sent?</h1>
+                                <p>Please advise us whether you would your newsletters sent in FULL A4 size transparent wallets folded & sent A5 to save postage. The “To” address box appears on the front page, bottom left if A5 is selected (due to the way it needs to be folded) or on the back page, bottom left if A4 is selected.</p><br /><br />
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Royal Mail Rates</td>
+                                            <td>A4 Newsletter</td>
+                                            <td>A5 Newsletter</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1st Class Mail</td>
+                                            <td>£0.80</td>
+                                            <td>£0.60</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2nd Class Mai</td>
+                                            <td>£0.60</td>
+                                            <td>£0.40</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p align="center">
+                                   <button type="button" class="btn btn-default" data-dismiss="modal">Send in Full A4 Size ></button>
+                                     <button type="button" class="btn btn-default" data-dismiss="modal">Fold & Send in A5 Size ></button>
+
+                                </p>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!--<div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>-->
+                </div>
+
+            </div>
+        </div>
+
+    <?php
+
+    }
+
 	public function viewdefaultvalues(){
-		
-	?>		
-		
-     	
-	
-	<?php	
+
+	?>
+
+
+
+	<?php
 	}
 
 }
