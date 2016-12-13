@@ -61,8 +61,8 @@
 
 		for($i=1;$i<=$totalelements;$i++){
 <<<<<<< HEAD
-			
-			$array_initial_val[$i] = '<li class="gs-w" data-sizey="2" data-sizex="12" data-col="1" data-row="1" style="background: rgb(255, 255, 199) none repeat scroll 0% 0%; margin-top: auto; margin-bottom: auto; position: absolute; top: 5px; left: 5px;">							
+
+			$array_initial_val[$i] = '<li class="gs-w" data-sizey="2" data-sizex="12" data-col="1" data-row="1" style="background: rgb(255, 255, 199) none repeat scroll 0% 0%; margin-top: auto; margin-bottom: auto; position: absolute; top: 5px; left: 5px;">
 =======
 
 			$array_initial_val[$i] = '<li class="gs-w" data-sizey="2" data-sizex="12" data-col="1" data-row="1" style="background: rgb(255, 255, 199) none repeat scroll 0% 0%; margin-top: auto; margin-bottom: auto; position: absolute; top: 5px; left: 5px;">
@@ -80,13 +80,13 @@
 										</div>
 									</li>';
 <<<<<<< HEAD
-									
-			$array_initial_val2[$i] = '<div class="gs-w" data-sizey="2" data-sizex="12" data-col="3" data-row="1" style="padding: 10px; background: rgb(255, 255, 199) none repeat scroll 0% 0%; margin-top: auto; margin-bottom: auto; min-height: auto; position:absolute; top:5px; left:5px; width:762px; height:265px;">						
-										<div class="grid-content-wrap">								
-										</div>								
-									</div>';									
-				
-			
+
+			$array_initial_val2[$i] = '<div class="gs-w" data-sizey="2" data-sizex="12" data-col="3" data-row="1" style="padding: 10px; background: rgb(255, 255, 199) none repeat scroll 0% 0%; margin-top: auto; margin-bottom: auto; min-height: auto; position:absolute; top:5px; left:5px; width:762px; height:265px;">
+										<div class="grid-content-wrap">
+										</div>
+									</div>';
+
+
 =======
 
 			$array_initial_val2[$i] = '<div class="gs-w" data-sizey="2" data-sizex="12" data-col="3" data-row="1" style="padding: 10px; background: rgb(255, 255, 199) none repeat scroll 0% 0%; margin-top: auto; margin-bottom: auto; min-height: auto; position:absolute; top:5px; left:5px; width:762px; height:265px;">
@@ -573,7 +573,7 @@ box-sizing: border-box;
 					<div id="pdfpagewrap<?php echo $i; ?>" class="pdfwrapper gridster">
 						<ul>
 <<<<<<< HEAD
-							<li data-sizey="2" data-sizex="12" data-col="3" data-row="1">						
+							<li data-sizey="2" data-sizex="12" data-col="3" data-row="1">
 =======
 							<li data-sizey="2" data-sizex="12" data-col="3" data-row="1">
 >>>>>>> origin/master
