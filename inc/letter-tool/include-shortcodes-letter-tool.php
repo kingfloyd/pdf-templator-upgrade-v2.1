@@ -28,40 +28,51 @@ function pdftvtpl2_letter_tool_func()
     		
  <div class="container" > 
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
-	  <li class="nav-item" id="letter-tool-tab-1" >
-	    <a class="nav-link active" data-toggle="tab" href="#letter-tool-tab-1-content" role="tab" aria-controls="letter-tool-1-content">Step 1 >></a>
-	  </li>
-	  <li class="nav-item" id="letter-tool-tab-2">
-	    <a class="nav-link" data-toggle="tab" href="#letter-tool-tab-2-content" role="tab" aria-controls="letter-tool-2-content">Step 2 >></a> 
-	  </li>
-	  <li class="nav-item" id="letter-tool-tab-3" >
-	    <a class="nav-link" data-toggle="tab" href="#letter-tool-tab-3-content" role="tab" aria-controls="letter-tool-3-content">Step 3 >></a>
-	  </li>
-	  <li class="nav-item" id="letter-tool-tab-4" >
-	    <a class="nav-link" data-toggle="tab" href="#letter-tool-tab-4-content" role="tab" aria-controls="letter-tool-4-content">Step 4 >></a>
-	  </li>
+		<!-- tab step 1  -->
+	    <li class="nav-item" id="letter-tool-tab-1" >
+	    	<a class="nav-link " data-toggle="tab" href="#letter-tool-tab-1-content" role="tab" aria-controls="letter-tool-1-content">Step 1 >></a>
+	  	</li>
+		<!-- tab step 2 -->
+	  	<li class="nav-item active" id="letter-tool-tab-2">
+	    	<a class="nav-link active" data-toggle="tab" href="#letter-tool-tab-2-content" role="tab" aria-controls="letter-tool-2-content">Step 2 >></a> 
+	  	</li>
+		<!-- tab step 3 -->
+	  	<li class="nav-item" id="letter-tool-tab-3" >
+	    	<a class="nav-link" data-toggle="tab" href="#letter-tool-tab-3-content" role="tab" aria-controls="letter-tool-3-content">Step 3 >></a>
+	  	</li>
+		<!-- tab step 4 -->
+	  	<li class="nav-item" id="letter-tool-tab-4" >
+	    	<a class="nav-link" data-toggle="tab" href="#letter-tool-tab-4-content" role="tab" aria-controls="letter-tool-4-content">Step 4 >></a>
+	  	</li> 
 	</ul>
 
 	<div class="tab-content">
-		<div class="tab-pane active" id="letter-tool-tab-1-content" role="tabpanel">    
-			<?php require_once("http://localhost/practice/wordpress/wp-content/plugins/pdf-templator-upgrade-v2.1/inc/letter-tool/includes/views/step1/create-pages-options.php") ?> 
 
+		<!-- content step 1 -->
+		<div class="tab-pane " id="letter-tool-tab-1-content" role="tabpanel">    
+			<?php require_once("http://localhost/practice/wordpress/wp-content/plugins/pdf-templator-upgrade-v2.1/inc/letter-tool/includes/views/step1/create-pages-options.php") ?>  
 		</div>
-		<div class="tab-pane" id="letter-tool-tab-2-content" role="tabpanel">
-			 <?php require_once("http://localhost/practice/wordpress/wp-content/plugins/pdf-templator-upgrade-v2.1/inc/letter-tool/includes/views/step2/compose-letter-tool.php") ?> 
 
+		<!-- content step 2 -->
+		<div class="tab-pane active" id="letter-tool-tab-2-content" role="tabpanel">
+			 <?php require_once("http://localhost/practice/wordpress/wp-content/plugins/pdf-templator-upgrade-v2.1/inc/letter-tool/includes/views/step2/compose-letter-tool.php") ?>  
 		</div>
+
+		<!-- content step 3 -->
 		<div class="tab-pane" id="letter-tool-tab-3-content" role="tabpanel">
 			<h1> Step 3  </h1>
 		</div>
+
+		<!-- content step 4 -->
 		<div class="tab-pane" id="letter-tool-tab-4-content" role="tabpanel">
 			<h1> Step 4 </h1>
 		</div>
+
 	</div>
 
 	<script>
 	  $(function () {
-	    $('#myTab a:first').tab('show')
+	    $('#myTab a:second').tab('show')
 	  })
 	</script>
 </div>

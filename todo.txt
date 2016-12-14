@@ -1,0 +1,150 @@
+Hi Rich
+
+Update for November 18, 2016
+add ping company name  
+add ping secondary email  
+add ping website  
+add ping account Manager 
+fix issue in real time retrieve freshdesk ticket that will not show if no unread tickets
+
+Testing this url it register new contact if not exist. 
+http://testing.umbrellasupport.co.uk/fd-contact-registration/?fullName=yourname12&email=testing12@gmail.com&phone=222-3831&mobile=+639069262984&partnerId=1233213@umbrellapartner.co.uk&partnerWebsite=http://www.google.com&companyName=YourCompany&accountManager=yourManager&otherEmail=yourOtherEmail3@gmail.com
+
+This will update contact and should be exist
+http://testing.umbrellasupport.co.uk/fd-contact-registration/?fullName=yourname12&email=testing12@gmail.com&phone=222-3831&mobile=+639069262984&partnerId=1233213@umbrellapartner.co.uk&partnerWebsite=http://www.google.com&companyName=YourCompany&accountManager=yourManager&otherEmail=yourOtherEmail3@gmail.com&action=update
+
+This screenshots shows the new inserted contact
+http://screencast.com/t/4RhD1QaM
+
+send activation email - can be done later
+
+
+update for November 21, 2016 
+
+Delete contact via email and action parameter
+Enable to insert again new contact after delete contact via api 
+contact freshdesk support 
+create a dummy data for mik to work on his local machine
+
+working on sso login authentication
+ - debugging sso login -> this is set to default yet, not automatic
+ - iframe the comment fields
+ - find ways the position of the textfield -> tobe continue
+
+ Todo for November 22, 2016 
+ Continue the positioning of the textfield 
+ Make the freshdesk sso dynamic login and automatic integrated with wordpress account
+
+ 
+
+Update for November 22, 2016 
+Continue the positioning of the textfield 
+Add sso functionality 
+Make the freshdesk sso dynamic login and automatic integrated with wordpress account 
+continue fixing the position of the iframe
+- got issue in accessing content, "Access-Control-Allow-Origin"
+
+Todo for November 23, 2016
+Contact support if its possible to keep reply field as open, this is iframe issue position
+Test and Finalize things 
+Ask mike progress and integrate
+
+Hi Rich,
+
+Update for November 24, 2016
+Check our inqueries to freshdesk addressed.
+Continue design fixes 
+Add correct icons 
+Start working on the reply details design  
+add attachment icon if there is attachments in latest comments
+fix notification details design 
+add attachment icon if there is attachment in the reply, also the attachment is clickable to view the file.
+
+main notifications display
+open and unopened ticket, with files display
+http://screencast.com/t/keeBqFqEA9
+http://screencast.com/t/l6qtJ60yS 
+Notification details  
+ticket
+http://screencast.com/t/FeMkdr30l 
+replies
+http://screencast.com/t/nqTrrEIYD 
+replies with attachments
+http://screencast.com/t/T4Mrhivqiz
+not click reply text field
+http://screencast.com/t/5rMV64nlSQ
+clicked reply text field
+http://screencast.com/t/QXZ4kTqD7
+ 
+Update for November 25, 2016
+Fix mobile responsive in main notifications display
+continue refine design both main notification and notification details
+arrange functions to work perfectly,  
+arrange ajax functions. 
+arrange codes
+refine functions to correctly set interval messages
+
+Hi Rich 
+Update for November 29,2016  
+1. Add design with our own textfield editor "tinymce".
+2. Update css design its being affected with other styles in the site. It could be done by other developer conflict.
+3. Add functionality to reply a ticket.
+4. Add functionality to add attachment of the ticket reply.
+5. Set one time load only for notification, messages and retrieve data because i noticed rate limit issue.
+6. We are able now to do reply and with attachment but when first load of the page after submit. Reply don't show directly but needs to Refresh again the - I need to do something for this in order to show directly.
+ 
+Update for December 8, 2016
+Started to install newsletter plugin 
+Added tick icon in submit new reply to a ticket
+Update the time to 3 seconds and redirect in reply ticket 
+Added timer like counter 3,2,1 and before execute redirect to /messages/ 
+add space between loading and text thing 
+add loading the umbrella message tab
+ 
+tomorrow continue the the sorting thing and update the time
+
+----------------------------------------------------------------------------------------------------
+
+Update for December 12, 2016
+1. Review the tasks list shared with floyd and understand each
+2. Setup news letter software plugin
+3. fix conflict of the files from newsletter to letter software
+4. App page for letter tool with the specific url of create-letter
+4. add shortcode for letter tool
+5. create tab header for steps 
+6. create the 3 options design in step 1
+7. add next step button
+8. add assets js, css and img folders and files for letter tools
+9. hit next button jump next tab
+ 
+Update for December 13, 2016
+1. set default selected in step 1 as New Letter (blank sheet)
+2. hit next button validate if selected either of the 3 then proceed to next step or else show an error that says "Please select an option"
+3. Testing different editor to see whats fit to our needs 
+4. Testing and debuging jQuery TE V.1.4.0 
+5. Testing and debugging froala editor 2.4.0   and between the 2 I choose froala editor 2.4.0 
+6. Add page line in the editor
+7. observer the newline height of the editor, this will allow me to control the page separation
+8. get total height in each new line
+9. add detect total page number 
+10. add place set correct position of the correct page new line
+
+
+
+
+change position top and page height to static in jason format
+make the page line undeletable
+7. get total height of the editor
+8. based on the height of the editor automatic generate and add page line separator
+style: border-bottom:1px dotted red; width:100%; height: 2px;
+id: letter-tool-page-line-separator-1, 2, 3, 4, 5
+
+
+
+
+
+
+
+3. default disable all the next tab except the first tab
+4. whatever is already visited, then that tab is open for revisit
+
