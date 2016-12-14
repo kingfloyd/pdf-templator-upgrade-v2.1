@@ -131,13 +131,27 @@ Update for December 13, 2016
 
 
 
-
+Update for December 14, 2016
 change position top and page height to static in jason format
+make the counter works correctly
 make the page line undeletable
-7. get total height of the editor
-8. based on the height of the editor automatic generate and add page line separator
-style: border-bottom:1px dotted red; width:100%; height: 2px;
-id: letter-tool-page-line-separator-1, 2, 3, 4, 5
+get total height of the editor
+based on the height of the editor automatic generate and add page line separator
+make all the codes to a function so that, codes will be easy to read and can be reused
+assist amir with what he needs for the api and plugins
+addd max pages allowed
+when page line added then the counter should automatically incremented in realtime
+tell and user and show message box that says " you exceed the max pages, change will be saved"
+add validation if max pages exceed then the latest update will not be added to the editor
+if content not added to editor then restore the previous content
+
+
+
+if there is 3 pages and if user select all and delete the content only 1 pages line will be delete, but all should be deleted
+and counter still remain to 3 and that should be 1
+
+if user hold enter and when user stop pressing enter, then even the page opened already 4 pages but only show 1 pages line - this has to open all 4 pages
+remove convert editor to html coding in the header
 
 
 

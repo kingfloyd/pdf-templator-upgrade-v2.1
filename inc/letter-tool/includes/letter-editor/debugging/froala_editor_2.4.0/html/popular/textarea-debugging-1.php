@@ -30,6 +30,7 @@
 <body>
   <div id="editor">
 
+    <div id="letter-tool-page-line-separator-0"  class='letter-tool-page-line-separator' > </div>
     <div id="letter-tool-page-line-separator-1"  class='letter-tool-page-line-separator' > </div>
     <div id="letter-tool-page-line-separator-2"  class='letter-tool-page-line-separator' > </div>
     <div id="letter-tool-page-line-separator-3"  class='letter-tool-page-line-separator' > </div>
@@ -69,7 +70,7 @@
   <script type="text/javascript" src="../../js/plugins/entities.min.js"></script>
  
   
-  <script type="text/javascript" src="js/letter-tool-js.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/letter-tool-style.css">
+  <script type="text/javascript" src="js/letter-tool-js-1.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/letter-tool-style-1.css">
 </body>
 </html>
