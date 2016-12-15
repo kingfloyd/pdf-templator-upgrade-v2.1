@@ -149,9 +149,9 @@ if content not added to editor then restore the previous content
 
 if there is 3 pages and if user select all and delete the content only 1 pages line will be delete, but all should be deleted
 and counter still remain to 3 and that should be 1
-
 if user hold enter and when user stop pressing enter, then even the page opened already 4 pages but only show 1 pages line - this has to open all 4 pages
 remove convert editor to html coding in the header
+
 
 
 

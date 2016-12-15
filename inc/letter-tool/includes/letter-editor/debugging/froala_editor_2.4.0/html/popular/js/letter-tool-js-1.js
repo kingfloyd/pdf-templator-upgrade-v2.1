@@ -1,5 +1,10 @@
  $(function(){  
-        $('#edit').on('froalaEditor.initialized', function (e, editor) {    
+        $('#edit').on('froalaEditor.initialized', function (e, editor) {
+
+
+
+
+            loadDefaultEditorContent("<br><br><br><br><Br><br><br><br><br><Br><br><br><br><br><Br>");
             // append pages 
             $('.fr-toolbar').append("<input type='button' value='1' id='lt-total-pages'>") 
 
@@ -21,13 +26,17 @@
             var $pages = 
                     '{"attribute":[' +
                         '{"top":"150", "pageHeight":"100" },' + // index 0 
-                        '{"top":"280", "pageHeight":"200" },' + // index 1
-                        '{"top":"480", "pageHeight":"400" },' + // index 2
-                        '{"top":"680", "pageHeight":"600" },' +  // index 3
-                        '{"top":"880", "pageHeight":"800" },' +  // index 4
-                        '{"top":"1080", "pageHeight":"1000" }' +  // index 4
+                        '{"top":"580", "pageHeight":"500" },' + // index 1
+                        '{"top":"1080", "pageHeight":"1000" },' + // index 2
+                        '{"top":"1580", "pageHeight":"1500" },' +  // index 3
+                        '{"top":"2080", "pageHeight":"2000" },' +  // index 4
+                        '{"top":"2580", "pageHeight":"2500" },' +  // index 4
+                        '{"top":"3000", "pageHeight":"3000" },' +  // index 4
+                        '{"top":"3580", "pageHeight":"3500" },' +  // index 4
+                        '{"top":"4080", "pageHeight":"4000" },' +  // index 4
+                        '{"top":"4580", "pageHeight":"4500" }' +  // index 4
                    '],"settings" : [' +
-                        '{"maxPage":4}' +
+                        '{"maxPage":13}' +
                    ']}';
 
             $pages = JSON.parse($pages);  
@@ -35,18 +44,27 @@
             var $teh = $('.fr-element').height();
             
             console.log("initialized editor height "  + $teh);
+
+            main();
               
             // detect typing content textarea of if there is achanges 
             $(this).parents('form').on('keyup', function () {
 
+                main();
+
+            });
+
+
+
+            function main() {
 
                 pageTop =  getPageTop(); //$pages.attribute[$pageCounter].top;
                 pageHeight = getPageHeightSpecific();  //$pages.attribute[$pageCounter].pageHeight;
                 maxPageHeight = getMaxPageHeight(); // $tiv * $pageCounter;
                 $maxPageHeightPrev = getMaxPageHeightPrev(); // maxPageHeight - getTotalIntervalForPageAndEditor();
-     
-                // get correct height of the textarea container 
-              
+
+                // get correct height of the textarea container
+
                 // add new page line when height is incremented
                 //var $teh = $('.fr-element').height();
 
@@ -83,9 +101,9 @@
                     }
 
 
-                }  else {      
+                }  else {
 
-                    // Just remove default line and position by index and array 
+                    // Just remove default line and position by index and array
                     console.log(" if(" + getTotalEditorHeight() + "  < " +getMaxPageHeightPrev() + ") { remove latest page. } ");
 
                     if(getTotalEditorHeight() <  getMaxPageHeightPrev()) {
@@ -96,19 +114,14 @@
                         // hide page line
                         removePageLine();
 
-                        // add page number 
+                        // add page number
                         recordTotalPageInHeader();
                     }
                 }
 
                 // if passed all the validation then save current content and this will served  as history
                 setContentHistory();
-
-            });
-
-
-
-
+            }
 
             function incrementPageNumberCheck() {
                 return $pageCounter + 1;
@@ -127,12 +140,65 @@
             function recordTotalPageInHeader(){
                 $('#lt-total-pages').val($pageCounter)
             }
+
+
+            function removeMultiplePageLine() {
+                var tiv = getTotalIntervalForPageAndEditor();
+                var c  = getPageCounter();
+                var ph = getMaxPageHeight();
+                var eh = getTotalEditorHeight();
+                var df = ph - eh;
+                var qt = df/tiv;
+                var pc = $pageCounter;
+                console.log("remove last page counter this page = #letter-tool-page-line-separator-"+ $pageCounter + " remove total " + qt + " of page line");
+                for(var i = 1; i < pc; i++) {
+                    if(i <= qt) {
+                        console.log("remove c = "  + $pageCounter + " i " + i + " qt" + qt);
+                        $('#letter-tool-page-line-separator-' + $pageCounter).css({'top': '0px', 'display': 'none'});
+                        $pageCounter--;
+                    }
+                }
+            }
+
+
+
+            function removeSinglePageLine() {
+                $('#letter-tool-page-line-separator-' + $pageCounter).css({'top': '0px', 'display': 'none'});
+            }
             function removePageLine() {
-                console.log("remove last page counter this page = #letter-tool-page-line-separator-"+ $pageCounter);
-                $('#letter-tool-page-line-separator-'+ $pageCounter).css({  'top': '0px', 'display': 'none'});
+
+                removeMultiplePageLine();
+
+                removeSinglePageLine();
+
+            }
+
+
+            function addMultiplePageLine() {
+                var tiv = getTotalIntervalForPageAndEditor();
+                var c  = getPageCounter();
+                var ph = getMaxPageHeight();
+                var eh = getTotalEditorHeight();
+                var df = eh - ph;
+                var qt = df/tiv;
+                var pc = $pageCounter;
+                console.log("remove last page counter this page = #letter-tool-page-line-separator-"+ $pageCounter + " remove total " + qt + " of page line");
+                for(var i = 1; i < qt; i++) {
+                    //if(i <= qt) {
+                        console.log("remove c = "  + $pageCounter + " i " + i + " qt" + qt);
+                        $("#letter-tool-page-line-separator-"+ $pageCounter).css({'top':getPageTop()+"px", 'display':'block'});
+                        $pageCounter++;
+                    //}
+                }
+            }
+            function addSinglePageLine() {
+                $("#letter-tool-page-line-separator-"+ $pageCounter).css({'top':getPageTop()+"px", 'display':'block'});
             }
             function addPageLine() {
-                $("#letter-tool-page-line-separator-"+ $pageCounter).css({'top':getPageTop()+"px", 'display':'block'});
+                addMultiplePageLine();
+
+
+                addSinglePageLine();
             }
 
             function getMaxPageHeight() {
@@ -177,6 +243,9 @@
                 updateEditorContent(getContentHistory())
             }
 
+            function loadDefaultEditorContent(content) {
+                updateEditorContent(content);
+            }
 
 
 
