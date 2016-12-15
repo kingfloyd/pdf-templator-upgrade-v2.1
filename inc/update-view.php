@@ -328,7 +328,7 @@ box-sizing: border-box !important;
 					
 					</label></h1>
 					<?php }else{ ?>
-					<label>Choose Newsletter Name: &nbsp;&nbsp;&nbsp; <a class="btn-danger btn" href="<?php echo site_url()."/pdf-template-list"; ?>">View Saved Template</a></label><br /><br />
+					<label>Choose Newsletter Name: 2 &nbsp;&nbsp;&nbsp; <a class="btn-danger btn" href="<?php echo site_url()."/pdf-template-list"; ?>">View Saved Template</a></label><br /><br />
 					<input type="text" class="form-control" required name="<?php echo PREMETA; ?>newsletter_title" />
 					
 					<?php } ?>
@@ -338,19 +338,27 @@ box-sizing: border-box !important;
 
 
 		</div>
-	<form action="" method="POST" id="step1form"  widget-next="step2wrap" form-next="step2form" form-target="step1form">	
+	<form action="" method="POST" id="step1form"  widget-next="step2wrap" form-next="step2form" form-target="step1form">
+
+
+
+
+
+
+
+
 		<div class="form-group">
 			<div class="col-sm-7">
-				<label>Choose Newsletter Template:</label><br /><br />
-				<input disabled type="radio" required name="<?php echo PREMETA; ?>newsletter_template" <?php checked_radio(get_pdfnewsletter_meta($pid,PREMETA.'newsletter_template'),"Blank Template"); ?> value="Blank Template">Blank Template  &nbsp;&nbsp;						
+				<label>Choose Newsletter Template: 11</label><br /><br />
+				<input disabled type="radio" required name="<?php echo PREMETA; ?>newsletter_template" <?php checked_radio(get_pdfnewsletter_meta($pid,PREMETA.'newsletter_template'),"Blank Template"); ?> value="Blank Template">Blank Template  &nbsp;&nbsp;
 				<input disabled type="radio" required name="<?php echo PREMETA; ?>newsletter_template" <?php checked_radio(get_pdfnewsletter_meta($pid,PREMETA.'newsletter_template'),"Version 1"); ?> value="Version 1"> Version 1 &nbsp;&nbsp;
 				<input disabled type="radio" required name="<?php echo PREMETA; ?>newsletter_template" <?php checked_radio(get_pdfnewsletter_meta($pid,PREMETA.'newsletter_template'),"Version 2"); ?>  value="Version 2"> Version 2 &nbsp;&nbsp;
 				<input disabled type="radio" required name="<?php echo PREMETA; ?>newsletter_template" <?php checked_radio(get_pdfnewsletter_meta($pid,PREMETA.'newsletter_template'),"Saved Template"); ?> value="Saved Template">Saved Template &nbsp;&nbsp;<br /><br />
-				
+
 				<?php
-					
+
 					//echo get_post_meta($pid,'saved_as_file',true)."-------------------------------------";
-				
+
 					$args = array(
 						'post_type'  => "pdftvtpl2",
 						'post_status' => 'publish',
@@ -359,61 +367,63 @@ box-sizing: border-box !important;
 
 					);
 
-					$the_query = new WP_Query( $args );	
-					
+					$the_query = new WP_Query( $args );
+
 					if(get_post_meta($pid,PREMETA.'newsletter_template',true)==="Saved Template"){
-						
+
 						$showtemplate = "style='display:block;'";
-						
-						
+
+
 					}else{
 						$showtemplate ="style='display:none;'";
-						
-					}	
-						
-					echo "<select class='form-control' name='".PREMETA."newsletter_select_template' ".$showtemplate."  >";	
-					echo "<option value=''>Select Template</option>";						
-					echo "<option value='blank'>Blank Template</option>";					
+
+					}
+
+					echo "<select class='form-control' name='".PREMETA."newsletter_select_template' ".$showtemplate."  >";
+					echo "<option value=''>Select Template</option>";
+					echo "<option value='blank'>Blank Template</option>";
 					if ( $the_query->have_posts() ) {
 						while ( $the_query->have_posts() ) {
 							$the_query->the_post();
-							
+
 							$selected = get_selected_meta(get_post_meta($_REQUEST['newsletter_id'],PREMETA."newsletter_select_template",true),$the_query->post->ID);
 							//echo get_post_meta($_REQUEST['newsletter_id'],PREMETA."newsletter_select_template",true);
 							echo "<option value='".$the_query->post->ID."' ".$selected.">".get_the_title($the_query->post->ID)."</option>";
-							
+
 						}
 						wp_reset_postdata();
 					} else {
 						echo "<h4>No saved pdf yet.</h4>";
 					}
-					echo "</select>";					
+					echo "</select>";
 
-				?> 				
-						
+				?>
+
 
 			</div>
 		</div>
 		<div class="clearfix"></div>
-		<br /><br />	
+		<br /><br />
 		<div class="form-group">
 			<div class="col-sm-12">
 				<label>Choose Number of Pages:</label><br /><br />
 				<input disabled type="radio" required name="<?php echo PREMETA; ?>newsletter_pagenum" <?php checked_radio(get_pdfnewsletter_meta($pid,PREMETA.'newsletter_pagenum'),"4"); ?> value="4">4 Pages (£0.60) &nbsp;&nbsp;
 				<input disabled type="radio" required name="<?php echo PREMETA; ?>newsletter_pagenum" <?php checked_radio(get_pdfnewsletter_meta($pid,PREMETA.'newsletter_pagenum'),"8"); ?> value="8">8 Pages (£1.00) &nbsp;&nbsp;
-				<input disabled type="radio" required name="<?php echo PREMETA; ?>newsletter_pagenum" <?php checked_radio(get_pdfnewsletter_meta($pid,PREMETA.'newsletter_pagenum'),"12"); ?> value="12">12 Pages (£1.20) 
+				<input disabled type="radio" required name="<?php echo PREMETA; ?>newsletter_pagenum" <?php checked_radio(get_pdfnewsletter_meta($pid,PREMETA.'newsletter_pagenum'),"12"); ?> value="12">12 Pages (£1.20)
 			</div>
 		</div>
 		<div class="clearfix"></div>
 		<br /><br />
-		<input type="hidden" name="action" value="process__pdftemplate_form" />
-		<input type="hidden" name="pid" value="<?php echo $_REQUEST['newsletter_id']; ?>" />
-		<input type="hidden" name="step1" value="true" />
-		
-		
+		<input type="text" name="action" value="process__pdftemplate_form" />
+		<input type="text" name="pid" value="<?php echo $_REQUEST['newsletter_id']; ?>" />
+		<input type="text" name="step1" value="true" />
+
+
 		<div class="form-group">
 			<button type="submit" name="step1button" class="btn btn-danger navigatebtn navigatebtnnext">next</button>
 		</div>
+
+
 	</form>
 </div>
 <!--- step2wrap-->
