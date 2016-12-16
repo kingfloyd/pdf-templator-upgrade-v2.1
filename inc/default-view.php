@@ -293,7 +293,7 @@ box-sizing: border-box;
 			</div>
 		</div><br /><br /><br />
 		
-		<div class="saved-content-fields" style="display:none;">
+		<div class="saved-content-fields lt-hide-element">
 			<div class="form-group">
 				<div class="col-sm-7">		
 				
@@ -336,7 +336,7 @@ box-sizing: border-box;
 		</div>
 		
 		
-		<div class="new-content-fields" style="display:none;">
+		<div class="new-content-fields lt-hide-element"  >
 			<div class="form-group">
 				<div class="col-sm-7">
 					<?php if(isset($_POST[PREMETA.'newsletter_title'])){ ?>
@@ -369,7 +369,7 @@ box-sizing: border-box;
 
 
 
-				<div class="col-sm-7" style="display:none">
+				<div class="col-sm-7" class="lt-hide-element">
 					<label>Choose Newsletter Template:</label><br /><br />
 					<input type="radio" required name="<?php echo PREMETA; ?>newsletter_template" <?php checked_radio(get_pdfnewsletter_meta($pid,PREMETA.'newsletter_template'),"Blank Template"); ?> value="Blank Template" autocomplete="off">Blank Template  &nbsp;&nbsp;						
 					<input type="radio" required name="<?php echo PREMETA; ?>newsletter_template" <?php checked_radio(get_pdfnewsletter_meta($pid,PREMETA.'newsletter_template'),"Version 1"); ?> value="Version 1" autocomplete="off"> Version 1 &nbsp;&nbsp;
@@ -393,7 +393,7 @@ box-sizing: border-box;
 
 						$the_query = new WP_Query( $args );	
 							
-						echo "<select style='display:none;' class='form-control' name='".PREMETA."newsletter_select_template' /*onchange='this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);'*/ >";	
+						echo "<select class='lt-hide-element style='' class='form-control' name='".PREMETA."newsletter_select_template' /*onchange='this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);'*/ >";
 						echo "<option value=''>Select Template</option>";										
 						if ( $the_query->have_posts() ) {
 							while ( $the_query->have_posts() ) {
@@ -419,10 +419,11 @@ box-sizing: border-box;
 			</div>
 			<div class="clearfix"></div>
 			<br />
-			<div class="form-group" style="display:none">
+			<div class="form-group" class='lt-hide-element'  >
 				<div class="col-sm-12">
 					<label>Choose Number of Pages:</label><br /><br />
-					<input type="radio" required name="<?php echo PREMETA; ?>newsletter_pagenum" <?php checked_radio($_POST['pdftvtpl2_newsletter_pagenum'],"4"); ?> value="4" checked>4 Pages (£0.60)
+					<input type="radio" required name="<?php echo PREMETA; ?>newsletter_pagenum" <?php checked_radio($_POST['pdftvtpl2_newsletter_pagenum'],"4"); ?> value="1" checked>1 Pages (£0.60)
+					<input type="radio" required name="<?php echo PREMETA; ?>newsletter_pagenum" <?php checked_radio($_POST['pdftvtpl2_newsletter_pagenum'],"4"); ?> value="4" >4 Pages (£0.60)
 					<input type="radio" required name="<?php echo PREMETA; ?>newsletter_pagenum" <?php checked_radio($_POST['pdftvtpl2_newsletter_pagenum'],"8"); ?> value="8">8 Pages (£1.00)
 					<input type="radio" required name="<?php echo PREMETA; ?>newsletter_pagenum" <?php checked_radio($_POST['pdftvtpl2_newsletter_pagenum'],"12"); ?> value="12">12 Pages (£1.20) 
 				</div>
