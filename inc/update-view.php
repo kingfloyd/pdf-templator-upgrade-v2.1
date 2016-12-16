@@ -340,13 +340,6 @@ box-sizing: border-box !important;
 		</div>
 	<form action="" method="POST" id="step1form"  widget-next="step2wrap" form-next="step2form" form-target="step1form">
 
-
-
-
-
-
-
-
 		<div class="form-group">
 			<div class="col-sm-7">
 				<label>Choose Newsletter Template: 11</label><br /><br />
@@ -404,7 +397,7 @@ box-sizing: border-box !important;
 		</div>
 		<div class="clearfix"></div>
 		<br /><br />
-		<div class="form-group">
+		<div class="form-group" >
 			<div class="col-sm-12">
 				<label>Choose Number of Pages:</label><br /><br />
 				<input disabled type="radio" required name="<?php echo PREMETA; ?>newsletter_pagenum" <?php checked_radio(get_pdfnewsletter_meta($pid,PREMETA.'newsletter_pagenum'),"4"); ?> value="4">4 Pages (£0.60) &nbsp;&nbsp;
@@ -414,9 +407,9 @@ box-sizing: border-box !important;
 		</div>
 		<div class="clearfix"></div>
 		<br /><br />
-		<input type="text" name="action" value="process__pdftemplate_form" />
-		<input type="text" name="pid" value="<?php echo $_REQUEST['newsletter_id']; ?>" />
-		<input type="text" name="step1" value="true" />
+		<input type="hidden" name="action" value="process__pdftemplate_form" />
+		<input type="hidden" name="pid" value="<?php echo $_REQUEST['newsletter_id']; ?>" />
+		<input type="hidden" name="step1" value="true" />
 
 
 		<div class="form-group">
@@ -433,7 +426,7 @@ box-sizing: border-box !important;
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="col-sm-12">
-				<h1 align="center" id="pdf-pagertitle">Front Page</h1>					
+				<h1 align="center" id="pdf-pagertitle">Front Page </h1>
 			</div>
 			
 			<div class="row pdfv2-pages-preview">
@@ -482,10 +475,13 @@ box-sizing: border-box !important;
 				<div id="pdf<?php echo $i; ?>" class="pdf-page callgotopage<?php echo $i; ?>">
 					<div style="text-align:center; width: 211mm;">
 						<button class='btn btn-danger addnew' type="button">Add Text Box</button>
-						<button data-pdfselected="pdf<?php echo $i; ?>" type='button' class='btn btn-danger pdfaddrow' data-toggle="modal" data-target="#pdfAddAdvertisement">Add Adverisement</button>
-						<!--<button data-pdfselected="pdf<?php echo $i; ?>" type='button' class='btn btn-danger pdfaddrow' data-toggle="modal" data-target="#pdfAddGrid">Multiple Text Box</button>-->
-						<button data-pdfselected="pdf<?php echo $i; ?>" type='button' class='btn btn-danger pdfaddrow' data-toggle="modal" data-target="#pdfAddReadymade">Add Readymade Content</button>						
-						<!----><a target="_blank" href="<?php echo site_url(); ?>/create-newsletter/?newsletter_id=<?php echo $_REQUEST['newsletter_id']; ?>&pdfpreview=1" class="btn-danger btn">Preview</a>
+
+
+						<button class="lt-hide-element" data-pdfselected="pdf<?php echo $i; ?>" type='button' class='btn btn-danger pdfaddrow' data-toggle="modal" data-target="#pdfAddAdvertisement">Add Adverisement</button>
+						<button class="lt-hide-element"  data-pdfselected="pdf<?php echo $i; ?>" type='button' class='btn btn-danger pdfaddrow' data-toggle="modal" data-target="#pdfAddReadymade">Add Readymade Content</button>
+
+
+						<a target="_blank" href="<?php echo site_url(); ?>/create-newsletter/?newsletter_id=<?php echo $_REQUEST['newsletter_id']; ?>&pdfpreview=1" class="btn-danger btn">Preview</a>
 					</div>
 					<br>		    
 					<div id="pdfpagewrap<?php echo $i; ?>" class="pdfwrapper gridster">

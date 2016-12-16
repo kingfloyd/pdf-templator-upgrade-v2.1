@@ -2,6 +2,17 @@
 
 function pdftvtpl2_do_shortcode(){
 	ob_start();
+    ?>
+
+
+
+
+
+
+    <link rel="stylesheet" type="text/css" href="<?php print pdftvtpl2_plugin_url; ?>/assets/css/letter-tool.css">
+    <?php
+
+
 
 
 	if(!is_user_logged_in()){
@@ -124,7 +135,9 @@ function pdftvtpl2_do_shortcode(){
 		include('update-view.php');
 		
 	}else{
-		
+
+
+
 		include('default-view.php');
 		
 	}	
