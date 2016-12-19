@@ -43,18 +43,30 @@ $pagesnum = count($pdfpage_contents);
 ?>
 
 
+
+
 <link rel="stylesheet" type="text/css" href="<?php echo pdftvtpl2_plugin_url; ?>/assets/css/jquery.gridster.min.css">
 <link rel="stylesheet" type="text/css" href="<?php echo pdftvtpl2_plugin_url; ?>/assets/css/bootstrap.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="<?php echo pdftvtpl2_plugin_url; ?>/assets/js/src/1.12.4-jquery.min.js.js"></script>
 <script src="<?php echo pdftvtpl2_plugin_url; ?>/assets/js/jquery.gridster.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="<?php echo pdftvtpl2_plugin_url; ?>/assets/jquery-csv-master/src/jquery.csv.min.js"></script>
 <script src="<?php echo pdftvtpl2_plugin_url; ?>/assets/jquery-ui/jquery-ui.js"></script>
 <script src="<?php echo pdftvtpl2_plugin_url; ?>/assets/js/bootstrap.min.js"></script>
-<link href="//cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css" rel="stylesheet">
+<link href="<?php echo pdftvtpl2_plugin_url; ?>assets/css/src/3.5.0-octicons.min.css" rel="stylesheet">
 
 <link href="<?php echo pdftvtpl2_plugin_url; ?>/assets/css/bootstrap-colorpicker.min.css" rel="stylesheet">
 <script src="<?php echo pdftvtpl2_plugin_url; ?>/assets/js/bootstrap-colorpicker.js"></script>
 <script src="<?php echo pdftvtpl2_plugin_url; ?>/assets/js/angularjs-v1.4.8.js"></script>
+
+
+
+
+
+<!--Jesus js-->
+
+<link rel="stylesheet" type="text/css" href="<?php print pdftvtpl2_plugin_url; ?>/assets/css/letter-tool.css" />
+<script src="<?php print pdftvtpl2_plugin_url; ?>/assets/js/letter-tool-editor.js" type="text/javascript" ></script>
+<script src="<?php print pdftvtpl2_plugin_url; ?>/assets/js/letter-tool.js" type="text/javascript"  > </script>
 
 
 
@@ -174,6 +186,7 @@ box-sizing: border-box !important;
 	<?php } ?>
 	var pdfcr = jQuery.noConflict();
 	pdfcr(document).ready(function () {
+		console.log("pdfcr is ready");
 		
 	pdfcr('.withcolor').colorpicker();
 		
@@ -312,7 +325,12 @@ box-sizing: border-box !important;
 
 <div class="wholewrapper">
 
-<!--step1wrap -->
+
+
+
+
+
+	<!--step1wrap -->
 <div class="pdfformwrap hiddenwrap"  id="step1wrap">
 		<div>
 			<?php echo $submit_return; ?>
@@ -339,6 +357,11 @@ box-sizing: border-box !important;
 
 		</div>
 	<form action="" method="POST" id="step1form"  widget-next="step2wrap" form-next="step2form" form-target="step1form">
+
+
+			<br><br><br>
+		<h3> Testingasdas asd asd </h3>
+
 
 		<div class="form-group">
 			<div class="col-sm-7">
@@ -426,32 +449,115 @@ box-sizing: border-box !important;
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="col-sm-12">
-				<h1 align="center" id="pdf-pagertitle">Front Page </h1>
+				<h1 align="center" id="pdf-pagertitle">Front Page 3</h1>
 			</div>
 			
 			<div class="row pdfv2-pages-preview">
 				<div class="navipager" style="display: table; margin: 0 auto;">
+
+
+
+					<?php
+					foreach($pdfpage_contents as $i=>$val) {
+						print strip_tags($val);
+					}
+
+
+					$pdfpage_contents = [1=>'<ul style="height: 295px; min-width: 100%; max-width: 100%; position: relative; padding: 0px;">
+							<li class="gs-w" data-sizey="2" data-sizex="120" data-col="1" data-row="1" style="background: none 0% 0% repeat scroll rgb(255, 255, 199); margin-top: auto; margin-bottom: auto; position: absolute; top: 5px; left: 5px; min-height: auto;">
+										<div class="settings-wrap">
+											<button style="float: right;" class="close-grid" type="button">x</button>
+											<div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal">
+												<img style="height: 20px; margin: 3px;" src="http://localhost/practice/wordpress/wp-content/plugins/pdf-templator-upgrade-v2.1/assets/img/settings-icon.png">
+											</div>
+											<div style="float: right; display: none;" class="pdftv2-column-content-edit" id="pdftv2-column-content-edit" data-toggle="modal" data-target="#pdftv2-wp-editor">
+												<img style="cursor:pointer;height: 16px; margin: 5px;" src="http://localhost/practice/wordpress/wp-content/plugins/pdf-templator-upgrade-v2.1/assets/img/edit-icon.png">
+											</div>
+										</div>
+										<div class="grid-content-wrap" style="padding: 10px;">
+										</div>
+									<span class="gs-resize-handle gs-resize-handle-both"></span></li>
+						</ul>', 2=>'<ul style="height: 295px; min-width: 100%; max-width: 100%; position: relative; padding: 0px;">
+							<li class="gs-w" data-sizey="2" data-sizex="120" data-col="1" data-row="1" style="background: none 0% 0% repeat scroll rgb(255, 255, 199); margin-top: auto; margin-bottom: auto; position: absolute; top: 5px; left: 5px; min-height: auto;">
+										<div class="settings-wrap">
+											<button style="float: right;" class="close-grid" type="button">x</button>
+											<div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal">
+												<img style="height: 20px; margin: 3px;" src="http://localhost/practice/wordpress/wp-content/plugins/pdf-templator-upgrade-v2.1/assets/img/settings-icon.png">
+											</div>
+											<div style="float: right; display: none;" class="pdftv2-column-content-edit" id="pdftv2-column-content-edit" data-toggle="modal" data-target="#pdftv2-wp-editor">
+												<img style="cursor:pointer;height: 16px; margin: 5px;" src="http://localhost/practice/wordpress/wp-content/plugins/pdf-templator-upgrade-v2.1/assets/img/edit-icon.png">
+											</div>
+										</div>
+										<div class="grid-content-wrap" style="padding: 10px;">
+										</div>
+									<span class="gs-resize-handle gs-resize-handle-both"></span></li>
+						</ul>', 3=>'<ul style="height: 295px; min-width: 100%; max-width: 100%; position: relative; padding: 0px;">
+							<li class="gs-w" data-sizey="2" data-sizex="120" data-col="1" data-row="1" style="background: none 0% 0% repeat scroll rgb(255, 255, 199); margin-top: auto; margin-bottom: auto; position: absolute; top: 5px; left: 5px; min-height: auto;">
+										<div class="settings-wrap">
+											<button style="float: right;" class="close-grid" type="button">x</button>
+											<div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal">
+												<img style="height: 20px; margin: 3px;" src="http://localhost/practice/wordpress/wp-content/plugins/pdf-templator-upgrade-v2.1/assets/img/settings-icon.png">
+											</div>
+											<div style="float: right; display: none;" class="pdftv2-column-content-edit" id="pdftv2-column-content-edit" data-toggle="modal" data-target="#pdftv2-wp-editor">
+												<img style="cursor:pointer;height: 16px; margin: 5px;" src="http://localhost/practice/wordpress/wp-content/plugins/pdf-templator-upgrade-v2.1/assets/img/edit-icon.png">
+											</div>
+										</div>
+										<div class="grid-content-wrap" style="padding: 10px;">
+										</div>
+									<span class="gs-resize-handle gs-resize-handle-both"></span></li>
+						</ul>', 4=>'<ul style="height: 295px; min-width: 100%; max-width: 100%; position: relative; padding: 0px;">
+							<li class="gs-w" data-sizey="2" data-sizex="120" data-col="1" data-row="1" style="background: none 0% 0% repeat scroll rgb(255, 255, 199); margin-top: auto; margin-bottom: auto; position: absolute; top: 5px; left: 5px; min-height: auto;">
+										<div class="settings-wrap">
+											<button style="float: right;" class="close-grid" type="button">x</button>
+											<div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal">
+												<img style="height: 20px; margin: 3px;" src="http://localhost/practice/wordpress/wp-content/plugins/pdf-templator-upgrade-v2.1/assets/img/settings-icon.png">
+											</div>
+											<div style="float: right; display: none;" class="pdftv2-column-content-edit" id="pdftv2-column-content-edit" data-toggle="modal" data-target="#pdftv2-wp-editor">
+												<img style="cursor:pointer;height: 16px; margin: 5px;" src="http://localhost/practice/wordpress/wp-content/plugins/pdf-templator-upgrade-v2.1/assets/img/edit-icon.png">
+											</div>
+										</div>
+										<div class="grid-content-wrap" style="padding: 10px;">
+										</div>
+									<span class="gs-resize-handle gs-resize-handle-both"></span></li>
+						</ul>', 5=>'<ul style="height: 295px; min-width: 100%; max-width: 100%; position: relative; padding: 0px;">
+							<li class="gs-w" data-sizey="2" data-sizex="120" data-col="1" data-row="1" style="background: none 0% 0% repeat scroll rgb(255, 255, 199); margin-top: auto; margin-bottom: auto; position: absolute; top: 5px; left: 5px; min-height: auto;">
+										<div class="settings-wrap">
+											<button style="float: right;" class="close-grid" type="button">x</button>
+											<div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal">
+												<img style="height: 20px; margin: 3px;" src="http://localhost/practice/wordpress/wp-content/plugins/pdf-templator-upgrade-v2.1/assets/img/settings-icon.png">
+											</div>
+											<div style="float: right; display: none;" class="pdftv2-column-content-edit" id="pdftv2-column-content-edit" data-toggle="modal" data-target="#pdftv2-wp-editor">
+												<img style="cursor:pointer;height: 16px; margin: 5px;" src="http://localhost/practice/wordpress/wp-content/plugins/pdf-templator-upgrade-v2.1/assets/img/edit-icon.png">
+											</div>
+										</div>
+										<div class="grid-content-wrap" style="padding: 10px;">
+										</div>
+									<span class="gs-resize-handle gs-resize-handle-both"></span></li>
+						</ul>'];
+					$pagesnum = 4;
+
+					?>
 					<?php foreach($pdfpage_contents as $i=>$val){ ?>
 
 						<?php if($i==1){ ?>
 						<a href="javascript:void(0)" class="pdfnavigate">
 							<div class="col-sm-1">
 								<img class="gotopage<?php echo $i; ?>" style="width:100%; margin-left:4px;" src="<?php echo pdftvtpl2_plugin_url; ?>/assets/img/page-img.png">						
-							   <b> Front Page</b>
+							   <b> Front Page 3</b>
 							</div>
 						</a>
 						<?php }elseif($i==$pagesnum){ ?>
 						<a href="javascript:void(0)" class="pdfnavigate">
 							<div class="col-sm-1">
 								<img class="gotopage<?php echo $i; ?>" style="width:100%; margin-left:4px;" src="<?php echo pdftvtpl2_plugin_url; ?>/assets/img/page-img.png">							
-							   <b> Back Page</b>
+							   <b> Back Page 3</b>
 							</div>	
 						</a>		
 						<?php }else{ ?>
 						<a href="javascript:void(0)" class="pdfnavigate">
 							<div class="col-sm-1">
 								<img class="gotopage<?php echo $i; ?>" style="width:100%; margin-left:4px;" src="<?php echo pdftvtpl2_plugin_url; ?>/assets/img/page-img.png">							
-							   <b> Page <?php echo $i; ?></b>
+							   <b> Page 3<?php echo $i; ?></b>
 							</div>	
 							<?php if($i==6 && $pagesnum>8){ ?>	</div><div class="navipager" style="display: table; margin: 0 auto;"> <?php } ?>
 						</a>	
@@ -474,7 +580,7 @@ box-sizing: border-box !important;
 				//$i = $i+1; ?>
 				<div id="pdf<?php echo $i; ?>" class="pdf-page callgotopage<?php echo $i; ?>">
 					<div style="text-align:center; width: 211mm;">
-						<button class='btn btn-danger addnew' type="button">Add Text Box</button>
+						<button class='btn btn-danger addnew' type="button" id="lt-add-editor-content">Add Text Box</button>
 
 
 						<button class="lt-hide-element" data-pdfselected="pdf<?php echo $i; ?>" type='button' class='btn btn-danger pdfaddrow' data-toggle="modal" data-target="#pdfAddAdvertisement">Add Adverisement</button>
@@ -491,8 +597,6 @@ box-sizing: border-box !important;
 						</ul>					
 					</div>
 				</div>
-				
-	
 				
 				<textarea style="display:none;" id="pdfcontent_input_holder<?php echo $i; ?>" name="pdfconverted_contents[<?php echo $i; ?>]" ></textarea>
 				<textarea style="display:none;" id="pdfcontent_input<?php echo $i; ?>"  name="pdfpages_contents[<?php echo $i; ?>]"  ><?php echo $val; ?></textarea>
@@ -673,7 +777,7 @@ box-sizing: border-box !important;
 				?>
 					<input name="httpfile" class="form-control" id="httpfield" type="text" value="<?php echo generate_pdftvtpl2_url(); ?>">
 					<br />
-				<?php	
+				<?php
 						
 					}
 
@@ -702,8 +806,6 @@ box-sizing: border-box !important;
 
 	<div class="form-group" ng-hide="_hideObj">
 		<div class="col-sm-12">
-		
-			
 			<div class="alert alert-danger" ng-repeat="x in readyMadeEntry">
 				<strong>{{ x.count }}x Readymade Article(s):</strong> £<span class="rdymdeprice">{{ x.cost   }}<span>
 			</div>
@@ -713,10 +815,8 @@ box-sizing: border-box !important;
 	
 	<div class="form-group" ng-hide="_hideObj">
 		<div class="col-sm-12">
-		
-			
 			<div class="alert alert-success" ng-repeat="x in advertisementEntry" ng-if="x.count != 0">
-				<strong>{{ x.count }}x {{x.name}} Advertisement:</strong> £<span class="rdymdeprice">{{ x.cost   }}<span>
+				<strong>{{x.count}}x {{x.name}} Advertisement:</strong> £<span class="rdymdeprice">{{ x.cost   }}<span>
 			</div>
 			
 		</div>
@@ -801,7 +901,6 @@ box-sizing: border-box !important;
 
 				<?php 
 
-						
 					if ( $the_query->have_posts() ) {
 						$i = 0;
 						while ( $the_query->have_posts() ) {

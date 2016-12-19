@@ -5,12 +5,25 @@ localStorage.setItem("selectedpdf", 0);
 
 var formselected = '';
 
+
+console.log("main js loaded");
+
+
+
+
+
+
+
+
+
+
+
+
 if(localStorage.getItem(main_script_object.step)==null){
-	
 	localStorage.setItem(main_script_object.step, "step2wrap");
-	
-	
 }
+
+
 pdfcr(function(){
 						
         pdfcr('.hiddenwrap').hide();			
@@ -519,15 +532,25 @@ pdfcr(function(){
 		})
 
 		pdfcr(document).on('click','#pdftv2-popup-wp-editor-editing-done',function(){		
-			
+
+
+
+			alert("test");
 			 pdfcr('.grid-content-wrap',globaleditorpointer).html(tinyMCE.activeEditor.getContent());
 			 
 			var newcontent = pdfcr(".foredit .grid-content-wrap").height()
 			
 			if(newcontent>1162){
+
 					pdfcr('.grid-content-wrap',globaleditorpointer).html("");
 					pdfcr(".gridster ul").data('gridster').resize_widget(pdfcr(".foredit"),120,2);
 					alert("Sorry cannot add content. Content height exceed the current page content.");
+
+
+
+
+
+
 					
 			}else{
 	
@@ -555,7 +578,7 @@ pdfcr(function(){
 			
 			 //alert(pdfcr(".foredit .grid-content-wrap").height());
 			//console.log(pdfcr(tinyMCE.activeEditor.getContainer()))				
-		})			
+		});
 		
 		pdfcr(document).on('click','.pdfaddrow',function(){						
 			 
@@ -1365,5 +1388,55 @@ app.controller('pdftpl2Ctrl', function($scope, $http) {
     $http({method:'post',url:main_script_object.ajax_url,params:{pid:main_script_object.newsletter_id,action:'get_advertisement_entry'}}).then(function(response) {
         $scope.advertisementEntry = response.data.records;
 		$scope._hideObj = false;
-    });		
+    });
+
+
+
+
+
+
+	// Jesus Test
+
+	$("#lt-add-editor-content").on('click', function(){
+
+		var editorContentHrml = $("#pdfpagewrap1").html()
+		var editorHeight = $("#pdfpagewrap1").height();
+		var editorContentHeight = $("#pdfpagewrap1 ul").height();
+
+		editorHeight = parseInt(editorHeight);
+		editorContentHeight = parseInt(editorContentHeight);
+
+
+
+		if(editorContentHeight > editorHeight) {
+			gridster.remove_widget( $('.gridster li').eq(1) );
+
+
+			// trigger adding another page
+			console.log("add new page now at the top");
+			console.log("you cant add another another content now");
+
+
+			// remove last gridster now using this code below
+			//gridster.remove_widget( $('.gridster li').eq(3) );
+		} else {
+			//gridster.remove_widget( $('.gridster li').eq(3) );
+			//             setTimeout(function(){
+			console.log("adding new content allowed");
+			//                 $("#pdfpagewrap1 ul li").last().remove();
+			//             }, 1000)
+
+
+		}
+
+
+		console.log(" eh " + editorHeight + " edc " + editorContentHeight);
+
+	});
 });
+
+
+
+
+
+

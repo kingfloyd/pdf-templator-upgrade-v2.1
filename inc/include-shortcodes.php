@@ -6,10 +6,6 @@ function pdftvtpl2_do_shortcode(){
 
 
 
-
-
-
-    <link rel="stylesheet" type="text/css" href="<?php print pdftvtpl2_plugin_url; ?>/assets/css/letter-tool.css">
     <?php
 
 
@@ -143,6 +139,9 @@ function pdftvtpl2_do_shortcode(){
 	}	
 	
 	echo "</div>";
+	
+
+
 	
 	  $output = ob_get_contents(); // end output buffering
     ob_end_clean(); // grab the buffer contents and empty the buffer
