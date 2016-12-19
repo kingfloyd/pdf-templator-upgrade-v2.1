@@ -1020,3 +1020,14 @@ function get_advertisement_entry(){
 	die();
 	
 }
+
+
+
+function isUrlHasLetterId() {
+
+	if(!isset($_GET['newsletter_id'])) {
+		return false;
+	} else {
+		return true;
+	}
+}

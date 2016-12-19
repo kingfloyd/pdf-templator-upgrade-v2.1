@@ -449,7 +449,7 @@ box-sizing: border-box !important;
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="col-sm-12">
-				<h1 align="center" id="pdf-pagertitle">Front Page 3</h1>
+				<h1 align="center" id="pdf-pagertitle">Front Page 3 1 2</h1>
 			</div>
 			
 			<div class="row pdfv2-pages-preview">
@@ -491,53 +491,12 @@ box-sizing: border-box !important;
 										<div class="grid-content-wrap" style="padding: 10px;">
 										</div>
 									<span class="gs-resize-handle gs-resize-handle-both"></span></li>
-						</ul>', 3=>'<ul style="height: 295px; min-width: 100%; max-width: 100%; position: relative; padding: 0px;">
-							<li class="gs-w" data-sizey="2" data-sizex="120" data-col="1" data-row="1" style="background: none 0% 0% repeat scroll rgb(255, 255, 199); margin-top: auto; margin-bottom: auto; position: absolute; top: 5px; left: 5px; min-height: auto;">
-										<div class="settings-wrap">
-											<button style="float: right;" class="close-grid" type="button">x</button>
-											<div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal">
-												<img style="height: 20px; margin: 3px;" src="http://localhost/practice/wordpress/wp-content/plugins/pdf-templator-upgrade-v2.1/assets/img/settings-icon.png">
-											</div>
-											<div style="float: right; display: none;" class="pdftv2-column-content-edit" id="pdftv2-column-content-edit" data-toggle="modal" data-target="#pdftv2-wp-editor">
-												<img style="cursor:pointer;height: 16px; margin: 5px;" src="http://localhost/practice/wordpress/wp-content/plugins/pdf-templator-upgrade-v2.1/assets/img/edit-icon.png">
-											</div>
-										</div>
-										<div class="grid-content-wrap" style="padding: 10px;">
-										</div>
-									<span class="gs-resize-handle gs-resize-handle-both"></span></li>
-						</ul>', 4=>'<ul style="height: 295px; min-width: 100%; max-width: 100%; position: relative; padding: 0px;">
-							<li class="gs-w" data-sizey="2" data-sizex="120" data-col="1" data-row="1" style="background: none 0% 0% repeat scroll rgb(255, 255, 199); margin-top: auto; margin-bottom: auto; position: absolute; top: 5px; left: 5px; min-height: auto;">
-										<div class="settings-wrap">
-											<button style="float: right;" class="close-grid" type="button">x</button>
-											<div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal">
-												<img style="height: 20px; margin: 3px;" src="http://localhost/practice/wordpress/wp-content/plugins/pdf-templator-upgrade-v2.1/assets/img/settings-icon.png">
-											</div>
-											<div style="float: right; display: none;" class="pdftv2-column-content-edit" id="pdftv2-column-content-edit" data-toggle="modal" data-target="#pdftv2-wp-editor">
-												<img style="cursor:pointer;height: 16px; margin: 5px;" src="http://localhost/practice/wordpress/wp-content/plugins/pdf-templator-upgrade-v2.1/assets/img/edit-icon.png">
-											</div>
-										</div>
-										<div class="grid-content-wrap" style="padding: 10px;">
-										</div>
-									<span class="gs-resize-handle gs-resize-handle-both"></span></li>
-						</ul>', 5=>'<ul style="height: 295px; min-width: 100%; max-width: 100%; position: relative; padding: 0px;">
-							<li class="gs-w" data-sizey="2" data-sizex="120" data-col="1" data-row="1" style="background: none 0% 0% repeat scroll rgb(255, 255, 199); margin-top: auto; margin-bottom: auto; position: absolute; top: 5px; left: 5px; min-height: auto;">
-										<div class="settings-wrap">
-											<button style="float: right;" class="close-grid" type="button">x</button>
-											<div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal">
-												<img style="height: 20px; margin: 3px;" src="http://localhost/practice/wordpress/wp-content/plugins/pdf-templator-upgrade-v2.1/assets/img/settings-icon.png">
-											</div>
-											<div style="float: right; display: none;" class="pdftv2-column-content-edit" id="pdftv2-column-content-edit" data-toggle="modal" data-target="#pdftv2-wp-editor">
-												<img style="cursor:pointer;height: 16px; margin: 5px;" src="http://localhost/practice/wordpress/wp-content/plugins/pdf-templator-upgrade-v2.1/assets/img/edit-icon.png">
-											</div>
-										</div>
-										<div class="grid-content-wrap" style="padding: 10px;">
-										</div>
-									<span class="gs-resize-handle gs-resize-handle-both"></span></li>
 						</ul>'];
-					$pagesnum = 4;
+
+					$pagesnum = 2;
 
 					?>
-					<?php foreach($pdfpage_contents as $i=>$val){ ?>
+					<?php foreach($pdfpage_contents as $i=>$val) { ?>
 
 						<?php if($i==1){ ?>
 						<a href="javascript:void(0)" class="pdfnavigate">

@@ -685,7 +685,8 @@ pdfcr(function(){
 		datus.add_widget('<li data-sizey="2" data-sizex="120" data-col=""  data-row="" style="background: rgb(255, 255, 199);"  ><div class="settings-wrap"><button style="float: right;"  class="close-grid" type="button">x</button><div style="float:right" title="edit main body style" class="pdftv2-button-column-settings" id="pdftv2-button-column-settings" data-target="#pdftv2-column-settings-edit" data-toggle="modal"><img style="height: 20px; margin: 3px;" src="'+pdftvtpl2_plugin_url+'/assets/img/settings-icon.png"></div><div style="float: right;" class="pdftv2-column-content-edit" id="pdftv2-column-content-edit" data-toggle="modal" data-target="#pdftv2-wp-editor"><img style="cursor:pointer;height: 20px;margin: 5px;" src="'+pdftvtpl2_plugin_url+'/assets/img/edit-icon.png"></div></div><div class="grid-content-wrap" style="padding:10px;" >'+tinyMCE.get('mycustomeditor2').getContent()+'</div></li>', 120, 120);	
 		
 		
-	})
+	});
+
 
 	pdfcr(document).on('click','.pdfnavigate',function(){
 
@@ -695,8 +696,9 @@ pdfcr(function(){
 		pdfcr('.pdf-page').hide();
 		pdfcr('#pdf'+pdfnavigate_val[1]).fadeIn(1000);
 		localStorage.selectedpdf = pdfnavigate_val[1];
+		console.log("clicked tab");
 		
-	})
+	});
 	
 	
 	pdfcr(document).on('click','#rdyviewerarticles',function(){
@@ -960,8 +962,13 @@ pdfcr(function(){
 					var totalnewcontentheight = eval(rdymdcontentHeight+gridcontent);
 										//alert(totalnewcontentheight)
 					if(totalnewcontentheight>1155){
-						
-						alert("Sorry cannot add content. Content height exceed the current page content.");
+
+
+
+						console.log("Sorry cannot add content. Content height exceed the current page content.");
+
+
+						console.log("next step")
 						
 					}else{
 						//1155
@@ -1032,11 +1039,13 @@ pdfcr(function(){
 					
 					var totalnewcontentheight = eval(rdymdcontentHeight+gridcontent);
 										//alert(totalnewcontentheight)
-					if(totalnewcontentheight>1155){
-						
-						alert("Sorry cannot add content. Content height exceed the current page content.");
-						
-					}else{
+					//if(totalnewcontentheight>1155){
+					//
+					//	alert("Sorry cannot add content. Content height exceed the current page content.");
+					//
+					//}
+					//
+					//else{
 						//1155
 						var rW = (rdymdcontentWidth)/7;
 						var rH = (totalnewcontentheight)/140;
@@ -1059,7 +1068,7 @@ pdfcr(function(){
 						
 						
 						 pdfcr('#pdfAddAdvertisement').modal('toggle');
-					}
+					//}
 	
 					
 				}
@@ -1409,12 +1418,24 @@ app.controller('pdftpl2Ctrl', function($scope, $http) {
 
 
 		if(editorContentHeight > editorHeight) {
-			gridster.remove_widget( $('.gridster li').eq(1) );
+
+
+			//gridster.remove_widget( $('.gridster li').eq(1) );
 
 
 			// trigger adding another page
 			console.log("add new page now at the top");
 			console.log("you cant add another another content now");
+
+
+
+			$('.callgotopage1').attr('style', 'display:none');
+			$( ".gotopage1" ).parent( "div" ).css( "border", "1px solid grey" );
+
+			$('.callgotopage2').attr('style', 'display:block');
+			$( ".gotopage2" ).parent( "div" ).css( "border", "1px solid red" );
+
+
 
 
 			// remove last gridster now using this code below

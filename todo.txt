@@ -147,10 +147,34 @@ if content not added to editor then restore the previous content
 
 
 
-if there is 3 pages and if user select all and delete the content only 1 pages line will be delete, but all should be deleted
-and counter still remain to 3 and that should be 1
-if user hold enter and when user stop pressing enter, then even the page opened already 4 pages but only show 1 pages line - this has to open all 4 pages
-remove convert editor to html coding in the header
+
+Hi Rich,
+
+Update for December 15, 2016
+
+1. if there is 3 pages and if user select all and delete the content only 1 pages line will be delete, but all should be deleted
+2. and counter still remain to 3 and that should be 1
+3. if user hold enter and when user stop pressing enter, then even the page opened already 4 pages but only show 1 pages line - this has to open all 4 pages
+5. remove convert editor to html coding in the header
+6. added   New Letter (includes letterhead), New Letter (blank sheet) and  Saved Letter in step 1 in floyds codes
+7. add design to 3 options in step 1 in floyds codes
+8. hide some element data for step 1 for newsletters in floyds codes
+9. remove "add advert  and add readymade content" in floyds codes
+
+I will be working on weekend/saturday to speed up.
+
+Thanks
+
+
+
+   default disable all the next tab except the first tab
+   whatever is already visited, then that tab is open for revisit
+   setup js and css styling
+   add editor classes
+   check function that controller when adding new grid
+   detect if the content exceed in the editor container and put validation
+   if detect content exceed then automatically create new page
+   if deleted all the content then automatically delete the current page and back to previous page
 
 
 
@@ -159,6 +183,5 @@ remove convert editor to html coding in the header
 
 
 
-3. default disable all the next tab except the first tab
-4. whatever is already visited, then that tab is open for revisit
+
 

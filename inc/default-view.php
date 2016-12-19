@@ -148,6 +148,13 @@
 <script src="<?php echo pdftvtpl2_plugin_url; ?>/assets/jquery-csv-master/src/jquery.csv.min.js"></script>
 <script src="<?php echo pdftvtpl2_plugin_url; ?>/assets/jquery-ui/jquery-ui.js"></script>
 <script src="<?php echo pdftvtpl2_plugin_url; ?>/assets/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo pdftvtpl2_plugin_url; ?>/assets/css/letter-tool.css">
+
+
+
+
+
+
 <style type="text/css">
 
 input[type=radio]{
@@ -359,7 +366,7 @@ box-sizing: border-box;
 
 
 				<div class="col-sm-7">
-					<label>Choose Newsletter Template:</label><br /><br />
+					<label>Choose Letter Tool Creation:</label><br /><br />
 					<?php require('letter-tool/includes/views/step1/letter-tool-choose-document.php') ?>
 				</div>
 
@@ -369,7 +376,7 @@ box-sizing: border-box;
 
 
 
-				<div class="col-sm-7" class="lt-hide-element">
+				<div class="col-sm-7 lt-hide-element"  >
 					<label>Choose Newsletter Template:</label><br /><br />
 					<input type="radio" required name="<?php echo PREMETA; ?>newsletter_template" <?php checked_radio(get_pdfnewsletter_meta($pid,PREMETA.'newsletter_template'),"Blank Template"); ?> value="Blank Template" autocomplete="off">Blank Template  &nbsp;&nbsp;						
 					<input type="radio" required name="<?php echo PREMETA; ?>newsletter_template" <?php checked_radio(get_pdfnewsletter_meta($pid,PREMETA.'newsletter_template'),"Version 1"); ?> value="Version 1" autocomplete="off"> Version 1 &nbsp;&nbsp;
@@ -398,7 +405,7 @@ box-sizing: border-box;
 						if ( $the_query->have_posts() ) {
 							while ( $the_query->have_posts() ) {
 								$the_query->the_post();
-								
+
 								echo "<option value='".$the_query->post->ID."'>".get_the_title($the_query->post->ID)."</option>";
 								
 							}
@@ -419,7 +426,7 @@ box-sizing: border-box;
 			</div>
 			<div class="clearfix"></div>
 			<br />
-			<div class="form-group" class='lt-hide-element'  >
+			<div class="form-group lt-hide-element " >
 				<div class="col-sm-12">
 					<label>Choose Number of Pages:</label><br /><br />
 					<input type="radio" required name="<?php echo PREMETA; ?>newsletter_pagenum" <?php checked_radio($_POST['pdftvtpl2_newsletter_pagenum'],"4"); ?> value="1" checked>1 Pages (£0.60)
@@ -486,12 +493,28 @@ box-sizing: border-box;
 		</div>	
 
 	</div>
-</div>	
+</div>
+
+
+
+<!--	-->
+<!-- STEP 2	-->
+<!--	-->
+
+
 <br /><br />
-<div class="pdftvtpl2_step2">
+
+<div class="pdftvtpl2_step2"  >
+
 <!-- 595 X 842 pixels size of a4 -->
-	<?php if($pagesnum>1){ ?>
-	<div class="row">
+
+
+
+	<?php if(isUrlHasLetterId()== true): ?>
+		<?php $pagesnum= 1; ?>
+		<?php if($pagesnum>1){ ?>
+
+		<div class="row">
 		<div class="col-sm-12">
 			<div class="row pdfv2-pages-preview">
 				
@@ -500,19 +523,19 @@ box-sizing: border-box;
 					<div class="col-sm-1">
 						<a href="javascript:void(0)" class="pdfnavigate"><img class="gotopage<?php echo $i; ?>" style="width:20px" src="<?php echo pdftvtpl2_plugin_url; ?>/assets/img/microsoft-doc.png"></a>
 						<br>
-					   <b> Front Page</b>
+					   <b> Front Page 1 1</b>
 					</div>
 					<?php }elseif($i==$pagesnum){ ?>
 					<div class="col-sm-1">
 						<a href="javascript:void(0)" class="pdfnavigate"><img class="gotopage<?php echo $i; ?>" style="width:20px" src="<?php echo pdftvtpl2_plugin_url; ?>/assets/img/microsoft-doc.png"></a>
 						<br>
-					   <b> Back Page</b>
+					   <b> Back Page 1</b>
 					</div>					
 					<?php }else{ ?>
 					<div class="col-sm-1">
 						<a href="javascript:void(0)" class="pdfnavigate"><img class="gotopage<?php echo $i; ?>" style="width:20px" src="<?php echo pdftvtpl2_plugin_url; ?>/assets/img/microsoft-doc.png"></a>
 						<br>
-					   <b> Page <?php echo $i; ?></b>
+					   <b> Page 1 1<?php echo $i; ?></b>
 					</div>					
 					<?php } ?>
 					
@@ -535,11 +558,11 @@ box-sizing: border-box;
 						<button data-pdfselected="pdf<?php echo $i; ?>" type='button' class='btn btn-danger pdfaddrow' data-toggle="modal" data-target="#pdfAddReadymade">Add Readymade Content</button>
 						&nbsp;&nbsp;&nbsp;
 						<?php if($i==0){ ?>
-						<b> Front Page</b>
+						<b> Front Page 2 1</b>
 						<?php }elseif($i==$pagesnum){ ?>
-						<b> Back Page</b>
+						<b> Back Page 2 1</b>
 						<?php }else{ ?>
-						<b> Page <?php echo $i; ?></b> 
+						<b> Page 2 1<?php echo $i; ?></b>
 						<?php } ?>
 					</div>
 					<br>		    
@@ -565,11 +588,11 @@ box-sizing: border-box;
 						<button data-pdfselected="pdf<?php echo $i; ?>" type='button' class='btn btn-danger pdfaddrow' data-toggle="modal" data-target="#pdfAddGrid">Add Columns</button>
 						<button data-pdfselected="pdf<?php echo $i; ?>" type='button' class='btn btn-danger pdfaddrow' data-toggle="modal" data-target="#pdfAddReadymade">Add Readymade Content</button>
 						<?php if($i==0){ ?>
-						<b> Front Page</b>
+						<b> Front Page 3 1</b>
 						<?php }elseif($i==$pagesnum){ ?>
-						<b> Back Page</b>
+						<b> Back Page 3 1</b>
 						<?php }else{ ?>
-						<b> Page <?php echo $i; ?></b> 
+						<b> Page 3 1 <?php echo $i; ?></b>
 						<?php } ?>
 					</div>
 					<br>		    
@@ -612,7 +635,12 @@ box-sizing: border-box;
 			<input class="btn-danger btn" type="button" value="Continue">
 		</div>	-->
 	</div>	
-	<?php } ?>	
+	<?php } ?>
+	<?php endif;  ?>
+
+
+
+
 </div>
 
 
@@ -621,6 +649,7 @@ box-sizing: border-box;
 
 <input type="hidden" name="<?php echo PREMETA; ?>noncename" id="pdftvtpl2_noncename" value="<?php echo wp_create_nonce( plugin_basename(__FILE__) ) ?>" />
 </form>
+
 <?php new Zeraus\Template\V2\PopUpPageBuilder(); ?>	
 	
 
