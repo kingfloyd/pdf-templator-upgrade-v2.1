@@ -1,34 +1,11 @@
 .letter-tool-page-line-separator{
-	border-bottom:1px dotted red;
-	width:100%;
+	border-bottom:1px dotted red; 
+	width:100%; 
 	height: 2px;
 	position: absolute;
-	top:0px;
+	top:0px; 
 	/*top: 100px;*/
-	position:relative;
-	z-index:100;
+	position:relative; 
+	z-index:100; 
 	display: none;
-}
-
-.fr-toolbar {
-	z-index: 101;
-}
-
-.lt-editor-unmovablebox {
-	/*border: 2px dotted #b3b3b3;*/
-	height: 106px;
-	width: 255px;
-	position: absolute;
-	z-index: 101;
-	top: 139px;
-	left: 791px;
-	background-color: white;
-	/* float: right; */
-	/* margin-top: 200px; */
-}
-.lt-editor-unmovablebox textarea {
-	border: 2px dotted black;
-	width: 100%;
-	height: 100%;
-	resize: none;
-}
+} 
