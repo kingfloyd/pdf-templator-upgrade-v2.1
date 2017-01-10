@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: PDF Templator Upgrade V2
+ * Plugin Name: PDF Templator Upgrade V2  - letter tool
  * Plugin URI: http://zerausmindtech.epizy.com/
  * Description: Tool to create templates to turn into pdfs
  * Version: 1.0
